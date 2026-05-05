@@ -30,7 +30,7 @@ const DICT = {
     // Generic
     signIn: "Sign in", signOut: "Sign out", tryFree7: "Try free · 7 days",
     skipTour: "Skip tour", next: "Next", back: "Back", startExploring: "Start exploring",
-    step: "Step", of: "of", replayTour: "Replay tour", walkThrough: "Walk through all 7 modules",
+    step: "Step", of: "of", replayTour: "Replay tour", walkThrough: "Walk through all 8 modules",
     startTour: "Start tour", platformTour: "PLATFORM TOUR", exitTour: "Exit tour",
     finishTour: "Finish tour", openModule: "Open {name}",
     close: "Close", cancel: "Cancel", save: "Save", delete: "Delete", create: "Create",
@@ -579,12 +579,15 @@ const DICT = {
       6: { title: "Platform Benchmark", headline: "Know the market, know your position",
            body: "30 competitive threat intelligence platforms ranked by a 5-dimension scoring system. Compare CyberWatch against Lumu, SOCRadar, Darktrace, Recorded Future, Mandiant, CrowdStrike and more. Includes podium, filtered by category.",
            h: ["Sortable by coverage, intel, automation, integrations or value", "Filter by NDR, CTI, XDR, SIEM, DRP", "Great for RFP responses and competitive positioning"] },
+      7: { title: "Security Assurance for Agentic Systems", headline: "Audit-grade assurance for AI agents",
+           body: "A consulting practice surface for delivering five engagement types — including the flagship ACSA (Agent Codebase Security Audit). Scope, sign quality gates, capture findings with risk scoring against OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF, ISO 42001 and EU AI Act.",
+           h: ["5 engagement types · ACSA flagship audit (10–15 days)", "Live tracker with phase progression and signed gates", "Findings register exports CSV/Markdown/JSON"] },
     },
   },
   es: {
     signIn: "Iniciar sesión", signOut: "Salir", tryFree7: "Probar gratis · 7 días",
     skipTour: "Saltar tour", next: "Siguiente", back: "Atrás", startExploring: "Empezar a explorar",
-    step: "Paso", of: "de", replayTour: "Repetir tour", walkThrough: "Recorrer los 7 módulos",
+    step: "Paso", of: "de", replayTour: "Repetir tour", walkThrough: "Recorrer los 8 módulos",
     startTour: "Iniciar tour", platformTour: "TOUR DE LA PLATAFORMA", exitTour: "Salir del tour",
     finishTour: "Finalizar tour", openModule: "Abrir {name}",
     close: "Cerrar", cancel: "Cancelar", save: "Guardar", delete: "Eliminar", create: "Crear",
@@ -1097,6 +1100,9 @@ const DICT = {
       6: { title: "Benchmark de Plataformas", headline: "Conoce el mercado, conoce tu posición",
            body: "30 plataformas competidoras de inteligencia de amenazas puntuadas en 5 dimensiones. Compara CyberWatch con Lumu, SOCRadar, Darktrace, Recorded Future, Mandiant, CrowdStrike y más. Incluye podio y filtrado por categoría.",
            h: ["Ordena por cobertura, inteligencia, automatización, integraciones o valor", "Filtra por NDR, CTI, XDR, SIEM, DRP", "Excelente para respuestas a RFP y posicionamiento competitivo"] },
+      7: { title: "Aseguramiento para Sistemas Agénticos", headline: "Aseguramiento con calidad de auditoría para agentes IA",
+           body: "Una superficie de práctica de consultoría para entregar cinco tipos de proyectos — incluyendo el flagship ACSA (Auditoría de Código de Agentes). Define alcance, firma quality gates, captura hallazgos con scoring de riesgo contra OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF, ISO 42001 y EU AI Act.",
+           h: ["5 tipos de proyectos · auditoría flagship ACSA (10–15 días)", "Tracker en vivo con progresión de fases y gates firmados", "Registro de hallazgos exporta CSV/Markdown/JSON"] },
     },
   },
 };;
@@ -1345,7 +1351,7 @@ const TOUR_STEPS = [
   },
 ];
 
-function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "Demo Corp" }, onLogout = () => {} }) {
+function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "Demo Corp" }, onLogout = () => {}, onGoHome = () => {} }) {
   const { t } = useT();
   const [tab, setTab] = useState("dashboard");
   const [threats, setThreats] = useState([]);
@@ -1463,13 +1469,19 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
         aria-hidden={!mobileNavOpen && typeof window !== "undefined" && window.innerWidth < 768}
       >
         <div className="px-5 py-5 border-b border-[var(--border)] flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-            <Shield className="w-5 h-5 text-slate-900" strokeWidth={2.5} />
-          </div>
-          <div className="leading-tight flex-1">
-            <div className="font-semibold tracking-tight text-sm">CyberWatch</div>
-            <div className="mono text-[11px] text-cyan-700 uppercase tracking-[0.18em]">XTI Platform</div>
-          </div>
+          <button
+            onClick={() => { setMobileNavOpen(false); onGoHome(); }}
+            className="flex items-center gap-2.5 group flex-1 text-left transition-opacity hover:opacity-80"
+            title="Back to home"
+            aria-label="Back to home">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-[0_0_24px_rgba(34,211,238,0.5)] transition-shadow">
+              <Shield className="w-5 h-5 text-slate-900" strokeWidth={2.5} />
+            </div>
+            <div className="leading-tight flex-1">
+              <div className="font-semibold tracking-tight text-sm group-hover:text-cyan-700 transition-colors">CyberWatch</div>
+              <div className="mono text-[11px] text-cyan-700 uppercase tracking-[0.18em]">XTI Platform</div>
+            </div>
+          </button>
           <button onClick={() => setMobileNavOpen(false)} className="md:hidden p-1.5 rounded-lg hover:bg-slate-100 text-slate-700" title={t("close")}>
             <X className="w-5 h-5" />
           </button>
@@ -4054,8 +4066,8 @@ function LandingPage({ onNavigate, onQuickExplore }) {
         .glow-cyan { box-shadow: 0 0 60px -15px rgba(34,211,238,0.5), 0 0 100px -30px rgba(34,211,238,0.3); }
       `}</style>
 
-      {/* NAV */}
-      <nav className="border-b border-cyan-500/10 backdrop-blur-xl bg-slate-900/85 fixed top-0 left-0 right-0 z-50">
+      {/* NAV — fija arriba, opaca, siempre visible */}
+      <nav className="border-b border-cyan-500/15 bg-slate-900 fixed top-0 left-0 right-0 z-50 shadow-lg shadow-slate-900/20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
           <a href="#top" onClick={(e) => { e.preventDefault(); closeMobileMenu(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             className="flex items-center gap-2.5 cursor-pointer group flex-shrink-0">
@@ -4105,7 +4117,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
         <div className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 border-t border-cyan-500/10 ${
           mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}>
-          <div className="px-4 py-3 space-y-1 bg-slate-900/95 backdrop-blur-xl">
+          <div className="px-4 py-3 space-y-1 bg-slate-900">
             <a href="#platform" onClick={closeMobileMenu}
               className="block px-3 py-3 rounded-lg text-sm text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-300 transition active:bg-cyan-500/20">
               Platform
@@ -4134,7 +4146,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </nav>
 
       {/* HERO */}
-      <section id="top" className="pt-32 pb-20 px-6 relative overflow-hidden scroll-mt-20">
+      <section id="top" className="pt-32 pb-20 px-6 relative overflow-hidden scroll-mt-24">
         <div className="absolute inset-0 grid-pattern opacity-40" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto relative">
@@ -4232,7 +4244,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* STATS — anchor #platform (overview de la plataforma) */}
-      <section id="platform" className="border-y border-cyan-500/10 bg-[var(--surface-0)] py-10 scroll-mt-20">
+      <section id="platform" className="border-y border-cyan-500/10 bg-[var(--surface-0)] py-10 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { n: "+130", l: "reports per quarter", s: "delivered to subscribers" },
@@ -4250,7 +4262,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* MODULES */}
-      <section id="modules" className="py-24 px-6 scroll-mt-20">
+      <section id="modules" className="py-24 px-6 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-14">
             <span className="mono text-xs uppercase tracking-[0.25em] text-cyan-400">{t("platformLabel")}</span>
@@ -4294,7 +4306,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* AGENTIC AI SECTION */}
-      <section id="agentic" className="py-24 px-6 relative overflow-hidden border-y border-cyan-500/10 scroll-mt-20">
+      <section id="agentic" className="py-24 px-6 relative overflow-hidden border-y border-cyan-500/10 scroll-mt-24">
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto relative">
@@ -4424,7 +4436,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="py-24 px-6 scroll-mt-20">
+      <section id="pricing" className="py-24 px-6 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="mono text-xs uppercase tracking-[0.25em] text-cyan-400">{t("pricingLabel")}</span>
@@ -4714,7 +4726,7 @@ export default function CyberWatchSaaS() {
     route === "landing" ? <LandingPage onNavigate={setRoute} onQuickExplore={quickExplore} /> :
     route === "login" ? <LoginView onNavigate={setRoute} onAuth={authenticate} /> :
     route === "signup" ? <SignupView onNavigate={setRoute} onAuth={authenticate} /> :
-    route === "dashboard" ? <CyberWatchDashboard user={user} onLogout={logout} /> : null;
+    route === "dashboard" ? <CyberWatchDashboard user={user} onLogout={logout} onGoHome={() => setRoute("landing")} /> : null;
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, t: (k) => k }}>
