@@ -6,7 +6,11 @@ import {
   ChevronRight, BarChart3, Crown, Trophy, Medal, Award, X,
   Mail, FileText, Users, Send, CheckCircle, Newspaper, Calendar, Download, Inbox,
   Target, Radar, Gauge, Fingerprint, KeyRound, ShieldCheck, ShieldAlert, Link2, Cloud, Cpu, Share2, Plus,
-  ArrowRight, Menu, ChevronDown
+  ArrowRight, Menu, ChevronDown,
+  FileSearch, ChevronLeft, Check, Unlock, Layers, Workflow, ScrollText, Calculator,
+  Bot, Settings2, Briefcase, ClipboardList, GitBranch, Boxes, Scale,
+  Trash2, Edit2, Save, AlertCircle, CheckCircle2, Circle,
+  FlagTriangleRight, FileBarChart, PenLine, Hash, Network
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -60,6 +64,7 @@ const DICT = {
     agenticBullet3: "Remediation plans in natural language: patch, workaround, rollback",
     agenticBullet4: "Executive briefings that translate technical into financial impact",
     aiRemediationPlan: "AI Remediation Plan", generatedIn: "Generated in 1.8s by Claude Opus 4.7",
+    tryAgenticNow: "Try Agentic AI now",
     aiPatch: "Patch", aiWorkaround: "Workaround", aiHardening: "Hardening", aiVerify: "Verify",
     bannerBadge: "No signup · Instant access",
     bannerTitle1: "Skip the demo call.", bannerTitle2: "See it in action now.",
@@ -76,6 +81,332 @@ const DICT = {
     navThreatDashboard: "Threat Dashboard", navThreatRegistry: "Threat Registry",
     navBreachCVE: "Breach & CVE Intel", navCTIReports: "CTI Reports",
     navHackRisk: "Hack Risk Score", navVLM: "Vulnerability Lifecycle",
+    navACSA: "Security Assurance",
+    // ===== ACSA MODULE =====
+    // Internal nav
+    acsaNavServices: "Services",
+    acsaNavDetail: "ACSA",
+    acsaNavScoping: "Scoping",
+    acsaNavProposals: "Proposals",
+    acsaNavTracker: "Tracker",
+    acsaFooterLeft: "Praxis·Agentic Practice · Internal platform module",
+    acsaFooterRight: "ACSA Methodology v1.0 · 30 Apr 2026",
+    acsaWordmarkSubtitle: "CYBERSECURITY · PRACTICE",
+    // Catalog view
+    acsaCatalogKicker: "Service Catalogue · 2026",
+    acsaCatalogTitle1: "Security assurance",
+    acsaCatalogTitle2: "for agentic systems.",
+    acsaCatalogIntro: "Five engagements designed for the security gaps that conventional AppSec, model evals, and SaaS scanners do not cover. Grounded in OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF, ISO 42001 and EU AI Act.",
+    acsaNewBadge: "New · April 2026",
+    acsaNewSubtitle: "Agent Codebase Security Audit",
+    acsaReadMethodology: "Read methodology",
+    acsaSectionFiveTitle: "The five engagements",
+    acsaPublicBeta: "Public Beta",
+    acsaActionOpen: "Open",
+    // Service descriptions
+    acsaSvcSTM: "AI Threat Modeling",
+    acsaSvcSTMLine: "Design-time threat analysis for agentic systems",
+    acsaSvcSTMDesc: "STRIDE/PASTA threat modeling adapted for LLM-integrated and multi-agent architectures, grounded in MITRE ATLAS.",
+    acsaSvcART: "Agent Red Teaming",
+    acsaSvcARTLine: "Runtime adversarial testing of deployed agents",
+    acsaSvcARTDesc: "Adversarial probing of agents in their runtime environment: prompt injection, tool abuse, jailbreaks, exfiltration.",
+    acsaSvcASR: "AI Security Architecture Review",
+    acsaSvcASRLine: "End-to-end architecture assessment",
+    acsaSvcASRDesc: "Reference-architecture review covering identity, isolation, data flows, controls, and resilience for AI systems.",
+    acsaSvcGOV: "AI Governance Readiness",
+    acsaSvcGOVLine: "ISO 42001 & EU AI Act preparation",
+    acsaSvcGOVDesc: "Controls assessment and evidence preparation for ISO 42001, EU AI Act high-risk obligations, and NIST AI RMF.",
+    acsaSvcACSA: "Agent Codebase Security Audit",
+    acsaSvcACSALine: "Code-level vulnerability audit for agentic systems",
+    acsaSvcACSADesc: "Fixed-fee static audit of agent source code combining Claude Security (Opus 4.7) with expert agentic-context interpretation.",
+    acsaWeeks23: "2–3 weeks",
+    acsaWeeks34: "3–4 weeks",
+    acsaWeeks3: "3 weeks",
+    acsaWeeks46: "4–6 weeks",
+    acsaDays1015: "10–15 days",
+    // Detail view
+    acsaDetailTagSvc: "SVC · 05 / ACSA",
+    acsaDetailTagBeta: "Public beta · 30 Apr 2026",
+    acsaDetailTitle1: "Agent Codebase",
+    acsaDetailTitle2: "Security Audit.",
+    acsaDetailIntro: "A fixed-fee, time-boxed audit of the source code that orchestrates LLMs, tools, and MCP servers — combining Anthropic's Claude Security with expert agentic-context interpretation.",
+    acsaCtaScoping: "Open scoping calculator",
+    acsaCtaTracker: "Live tracker",
+    acsaCtaBackCatalogue: "Back to catalogue",
+    acsaAtAGlance: "At a glance",
+    acsaAtAGlanceDuration: "Duration",
+    acsaAtAGlanceDurationVal: "10–15 working days",
+    acsaAtAGlanceCalendar: "Calendar",
+    acsaAtAGlanceCalendarVal: "3 weeks end-to-end",
+    acsaAtAGlancePricing: "Pricing",
+    acsaAtAGlancePricingVal: "Fixed-fee · 3 tiers",
+    acsaAtAGlanceBand: "Band",
+    acsaAtAGlanceBandVal: "$24k – $78k",
+    acsaAtAGlanceTeam: "Team",
+    acsaAtAGlanceTeamVal: "Lead + Sr. Eng + QA",
+    acsaAtAGlanceTool: "Primary tool",
+    acsaAtAGlanceToolVal: "Claude Security · Opus 4.7",
+    acsaPillar1H: "Claude Security at the core",
+    acsaPillar1B: "Opus 4.7 reasons across files, traces data flows, and runs adversarial verification — catching context-dependent vulnerabilities that pattern matchers miss.",
+    acsaPillar2H: "Agentic context, not just code",
+    acsaPillar2B: "Every finding is translated into the language of agentic risk: who is the upstream attacker, what tool is reached, what is the blast radius.",
+    acsaPillar3H: "Audit-grade evidence",
+    acsaPillar3B: "Findings map to OWASP LLM, ATLAS, NIST AI RMF, ISO 42001 and EU AI Act Article 15 — directly usable for board and regulator.",
+    acsaMethodologyKicker: "Methodology · v1.0",
+    acsaMethodologyTitle: "Seven phases, signed gates.",
+    acsaPhaseLabel: "Phase",
+    acsaPhaseDays: "days",
+    acsaPhaseOutput: "Output",
+    acsaPhaseActivities: "Activities",
+    acsaPhasePrev: "Previous",
+    acsaPhaseNext: "Next",
+    acsaAlignmentKicker: "Alignment",
+    acsaAlignmentTitle: "Five frameworks. One register.",
+    acsaAlignmentBody: "Every confirmed finding maps to a control in each applicable framework. The mapping is the canonical reference used in Phase 4 and is reproduced verbatim in the deliverable register.",
+    acsaTaxonomyKicker: "Agentic taxonomy",
+    acsaTaxonomyTitle: "Eight categories every finding belongs to.",
+    acsaCtaCloseTitle: "Scope your engagement.",
+    acsaCtaCloseBody: "The scoping calculator returns a tier, an indicative price band, and a phase plan tuned to your codebase.",
+    acsaCtaCloseBtn: "Open calculator",
+    // Phases
+    acsaPhase00: "Pre-engagement & scoping",
+    acsaPhase01: "Asset inventory & surface mapping",
+    acsaPhase02: "Static analysis with Claude Security",
+    acsaPhase03: "Agentic context interpretation",
+    acsaPhase04: "Framework correlation & prioritisation",
+    acsaPhase05: "Remediation guidance",
+    acsaPhase06: "Reporting & executive readout",
+    // Calculator
+    acsaCalcBack: "Back to ACSA",
+    acsaCalcKicker: "ACSA · Scoping Calculator",
+    acsaCalcTitle1: "Inputs in.",
+    acsaCalcTitle2: "Tier and quote out.",
+    acsaCalcInputs: "Engagement inputs",
+    acsaCalcAgents: "Agents in scope",
+    acsaCalcAgentsHint: "Distinct agentic systems",
+    acsaCalcTools: "Tool implementations",
+    acsaCalcToolsHint: "Functions / plugins / capabilities exposed to the LLM",
+    acsaCalcMcp: "MCP servers (custom)",
+    acsaCalcMcpHint: "Client-authored MCP servers and clients",
+    acsaCalcLoc: "Approx. lines of code",
+    acsaCalcLocHint: "Across all in-scope repositories",
+    acsaCalcLangs: "Implementation languages",
+    acsaCalcLangsHint: "+5% per language beyond two",
+    acsaCalcModifiers: "Modifiers",
+    acsaCalcModEU: "EU AI Act high-risk classification",
+    acsaCalcModMulti: "Multi-jurisdiction deployment",
+    acsaCalcModThreat: "Documented threat model + architecture present",
+    acsaCalcModThreatOn: "−5% maturity discount",
+    acsaCalcModThreatOff: "+10% (must-build)",
+    acsaCalcClient: "Client (optional)",
+    acsaCalcOrg: "Organization",
+    acsaCalcContact: "Primary contact",
+    acsaCalcRecTier: "Recommended tier",
+    acsaCalcSurface: "Surface profile",
+    acsaCalcConstrained: "Constrained",
+    acsaCalcExtensive: "Extensive",
+    acsaCalcPriceBand: "Indicative price band (USD)",
+    acsaCalcWorkingDays: "Working days",
+    acsaCalcAdjustment: "Adjustment",
+    acsaCalcPhasePlan: "Phase plan",
+    acsaCalcSavedBtn: "Saved",
+    acsaCalcSaveProposal: "Save proposal",
+    acsaCalcViewAll: "View all",
+    acsaCalcAutosaved: "Auto-saved · session storage",
+    acsaProfileConstrained: "Constrained",
+    acsaProfileModerate: "Moderate",
+    acsaProfileSubstantial: "Substantial",
+    acsaProfileExtensive: "Extensive",
+    acsaTierStarter: "Starter",
+    acsaTierStandard: "Standard",
+    acsaTierEnterprise: "Enterprise",
+    acsaTierMultiwave: "Multi-wave",
+    // Proposals
+    acsaPropBack: "Back",
+    acsaPropKicker: "Saved proposals",
+    acsaPropTitle1: "Drafts &",
+    acsaPropTitle2: "SoW exports.",
+    acsaPropEmptyTitle: "No proposals saved yet",
+    acsaPropEmptyBody: "Use the scoping calculator to scope an engagement and save it here.",
+    acsaPropOpenCalc: "Open calculator",
+    acsaPropUntitled: "Untitled engagement",
+    acsaPropDelete: "Delete",
+    acsaPropTier: "Tier",
+    acsaPropDays: "Days",
+    acsaPropProfile: "Profile",
+    acsaPropPriceBand: "Indicative price band",
+    acsaPropInputs: "Inputs",
+    acsaPropExportSOW: "Export SoW draft (Markdown)",
+    acsaPropSelectPreview: "Select a proposal to preview the SoW draft.",
+    acsaKVAgents: "Agents",
+    acsaKVTools: "Tools",
+    acsaKVMcp: "MCP servers",
+    acsaKVLoc: "LoC",
+    acsaKVLangs: "Languages",
+    acsaKVRegHigh: "EU AI Act high-risk",
+    acsaKVRegMulti: "Multi-jurisdiction",
+    acsaKVThreatModel: "Threat model present",
+    acsaYes: "Yes",
+    acsaNo: "No",
+    // Tracker
+    acsaTrackerKicker: "Live Engagement Tracker · v1.0",
+    acsaTrackerTitle1: "Run the engagement.",
+    acsaTrackerTitle2: "Sign the gates.",
+    acsaTrackerIntro: "One workspace per ACSA engagement. Track activities, capture findings with risk scoring, sign quality gates, and bundle the deliverable package at Phase 6.",
+    acsaTrackerBtnFromCalc: "From calculator",
+    acsaTrackerBtnNew: "New engagement",
+    acsaTrackerEmptyTitle: "No active engagements",
+    acsaTrackerEmptyBody: "Create a new engagement to start tracking phases, gates, and findings.",
+    acsaTrackerCreateFirst: "Create first engagement",
+    acsaTrackerActiveTitle: "Active engagements",
+    acsaTrackerOnBooks: "on the books",
+    acsaTrackerLoading: "Loading engagements…",
+    acsaCardUntitled: "Untitled",
+    acsaCardStarted: "started",
+    acsaCardProgress: "Progress",
+    acsaCardGates: "Gates",
+    acsaCardP0P1: "P0/P1",
+    // New engagement modal
+    acsaModalKicker: "New engagement",
+    acsaModalTitle: "Initialise tracker",
+    acsaModalEngId: "Engagement ID",
+    acsaModalTier: "Tier",
+    acsaModalClient: "Client",
+    acsaModalLead: "Practice Lead",
+    acsaModalEngineer: "Senior Engineer",
+    acsaModalQA: "QA Reviewer",
+    acsaModalStartDate: "Start date",
+    acsaModalCancel: "Cancel",
+    acsaModalCreate: "Create engagement",
+    // Engagement view
+    acsaEngBackAll: "All engagements",
+    acsaEngActive: "Active",
+    acsaEngLead: "Lead",
+    acsaEngEng: "Eng",
+    acsaEngQA: "QA",
+    acsaEngStarted: "Started",
+    acsaStatTotal: "Total",
+    acsaStatOpen: "Open",
+    acsaTabPhases: "Phases & Gates",
+    acsaTabComponents: "Components",
+    acsaTabFindings: "Findings",
+    acsaTabReport: "Report",
+    // Phases tab
+    acsaPhProgression: "Phase progression",
+    acsaPhActivitiesLabel: "Activities",
+    acsaGateSigned: "Gate signed",
+    acsaGatePending: "Gate pending",
+    acsaGateSignedBy: "Signed by",
+    acsaGateDate: "Date",
+    acsaGateNote: "Note",
+    acsaGateRevoke: "Revoke signature",
+    acsaGateSigner: "Signer",
+    acsaGateNoteLabel: "Note (optional)",
+    acsaGateNotePlaceholder: "Any context for the audit trail...",
+    acsaGateSignBtn: "Sign gate",
+    acsaGateNeedActivities: "Complete all activities first",
+    // Components tab
+    acsaCompKicker: "Phase 1 deliverable",
+    acsaCompTitle: "Agent Component Register",
+    acsaCompAdd: "Add component",
+    acsaCompNew: "New component",
+    acsaCompEditing: "Editing",
+    acsaCompId: "Component ID",
+    acsaCompType: "Type",
+    acsaCompRepo: "Repository",
+    acsaCompLang: "Language",
+    acsaCompPath: "File path",
+    acsaCompUpstream: "Upstream trust",
+    acsaCompDownstream: "Downstream blast",
+    acsaCompPriority: "Priority target",
+    acsaCompPriorityYes: "Yes — flagged for priority Phase 2 scanning",
+    acsaCompPriorityNo: "No",
+    acsaCompNotes: "Notes",
+    acsaCompCancel: "Cancel",
+    acsaCompSave: "Save",
+    acsaCompEmpty: "No components yet — add the agent surface inventory",
+    acsaCompTblID: "ID",
+    acsaCompTblType: "Type",
+    acsaCompTblRepo: "Repository",
+    acsaCompTblTrust: "Trust → Blast",
+    acsaCompTblPriority: "Priority",
+    acsaCompPriorityChip: "Priority",
+    // Findings tab
+    acsaFindKicker: "Findings register",
+    acsaFindTitle: "Vulnerability findings",
+    acsaFindAdd: "Add finding",
+    acsaFindNew: "New finding",
+    acsaFindEditing: "Editing",
+    acsaFindComputed: "Computed",
+    acsaFindId: "ID",
+    acsaFindFTitle: "Title",
+    acsaFindComponent: "Component (AC-NNN)",
+    acsaFindRepo: "Repository",
+    acsaFindFilePath: "File path",
+    acsaFindLineRange: "Line range",
+    acsaFindDiscovery: "Discovery method",
+    acsaFindTaxonomy: "Agentic taxonomy",
+    acsaFindOwasp: "OWASP LLM",
+    acsaFindAtlas: "ATLAS technique",
+    acsaFindExcerpt: "Claude Security excerpt + confidence",
+    acsaFindExcerptHint: "Verbatim reasoning excerpt with confidence factor...",
+    acsaFindNarrative: "Exploit Narrative (5-question)",
+    acsaFindNarrativeHint: "Who is the upstream attacker? What untrusted input flows in? What tool/capability is reached? What is the downstream blast radius? What existing controls reduce realistic likelihood?",
+    acsaFindLikelihood: "Likelihood",
+    acsaFindImpact: "Impact",
+    acsaFindAmplification: "Agentic Amplification",
+    acsaFindAmpLow: "1.0 — passive",
+    acsaFindAmpHigh: "2.5 — autonomous + privileged",
+    acsaFindRemediation: "Remediation (patch template + thematic)",
+    acsaFindPreventive: "Preventive control",
+    acsaFindRegulatory: "Regulatory tag",
+    acsaFindStatus: "Status",
+    acsaFindReviewer: "Reviewer",
+    acsaFindReviewDate: "Review date",
+    acsaFindCancel: "Cancel",
+    acsaFindSave: "Save finding",
+    acsaFindFilterAll: "All",
+    acsaFindSearch: "Search findings...",
+    acsaFindOf: "of",
+    acsaFindEmptyNone: "No findings recorded yet",
+    acsaFindEmptyFiltered: "No findings match the filter",
+    acsaFindLikelihoodLabel: "Likelihood:",
+    acsaFindImpactLabel: "Impact:",
+    acsaFindAmpLabel: "Amp:",
+    acsaFindOwaspLabel: "OWASP:",
+    // Levels & status
+    acsaLvlLow: "Low",
+    acsaLvlMedium: "Medium",
+    acsaLvlHigh: "High",
+    acsaLvlCritical: "Critical",
+    acsaStOpen: "Open",
+    acsaStAck: "Acknowledged",
+    acsaStMitigated: "Mitigated",
+    acsaStAccepted: "Accepted risk",
+    acsaStFalsePositive: "False positive",
+    // Report tab
+    acsaRepKicker: "Phase 6 — Reporting",
+    acsaRepTitle: "12-point report quality checklist",
+    acsaRepProgress: "Progress",
+    acsaRepNeedAll: "Complete all 12 items before signing Gate 4",
+    acsaRepSummaryKicker: "Engagement summary",
+    acsaRepFindings: "Findings",
+    acsaRepAvgScore: "Avg score",
+    acsaRepBundleKicker: "Deliverable bundle",
+    acsaRepExportSummary: "Executive summary (Markdown)",
+    acsaRepExportCsv: "Findings register (CSV)",
+    acsaRepExportJson: "Full engagement (JSON)",
+    acsaRepBundleNote: "For the audit report DOCX and executive deck PPTX, use the Phase 6 templates from the practice repository.",
+    acsaRepGate4Signed: "Gate 4 signed",
+    acsaRepGate4Pending: "Gate 4 pending",
+    acsaRepGate4Title: "Final report",
+    acsaRepGate4SignedBody: "Signed by {signer} on {date}",
+    acsaRepGate4PendingBody: "Sign Gate 4 from the Phases tab once the 12-point checklist is complete.",
+    acsaRepDeleteQuestion: "Delete this engagement?",
+    acsaRepDeleteWarning: "This permanently removes all findings, components, and gate signatures. This cannot be undone.",
+    acsaRepDeleteCancel: "Cancel",
+    acsaRepDeleteConfirm: "Confirm delete",
+    acsaRepDeleteEng: "Delete engagement",
     navBenchmark: "Platform Benchmark",
     sectionIntelligence: "Intelligence", sectionRiskCompliance: "Risk & Compliance",
     agenticSidebar: "Autonomous agents powered by Claude Opus 4.7 investigate, triage and remediate threats.",
@@ -145,7 +476,7 @@ const DICT = {
     // Reports tab
     reportsHeroBadge: "Cyber Threat Intelligence Subscription",
     reportsHeroTitle: "+130 reports per quarter",
-    reportsHeroSubtitle: "Daily threat news, ransomware monitoring, credential leaks, hacktivism, sectorial trends. Inspired by Telefónica Tech, expanded with more report types.",
+    reportsHeroSubtitle: "Daily threat news, ransomware monitoring, credential leaks, hacktivism, sectorial trends. Curated by our analysts and powered by Agentic AI.",
     reportsTabPublic: "Public landing", reportsTabAdmin: "Admin panel", reportsTabArchive: "Archive",
     // Risk
     riskHeroBadge: "Hack Risk Score · External Attack Surface Management",
@@ -238,7 +569,7 @@ const DICT = {
            h: ["Three modes: Recent, Search, Breaches", "Every finding links to NVD and MITRE", "Use this when a CVE hits the news"] },
       3: { title: "CTI Reports", headline: "130+ intelligence reports per quarter",
            body: "Subscribers receive 11 types of reports covering daily threat news, ransomware monitoring, credential leaks, hacktivism, sectorial trends and more. Manage subscribers, generate reports, browse the archive.",
-           h: ["Public landing + admin panel + report archive", "Reports are auto-generated from your live threat data", "Inspired by Telefónica Tech · more report types"] },
+           h: ["Public landing + admin panel + report archive", "Reports are auto-generated from your live threat data", "11 report types curated by analysts"] },
       4: { title: "Hack Risk Score", headline: "See your company as an attacker sees it",
            body: "External Attack Surface Management. Enter a domain and get a 0-100 score across 8 dimensions: attack surface, credential leaks, vulnerabilities, SSL/TLS, email, DNS, dark web, cloud posture. Plus compliance mapping to NIST/ISO/NIS2/GDPR/DORA.",
            h: ["8 scan phases run in real time", "Remediation guidance per finding", "Shareable report with 7-day token"] },
@@ -285,6 +616,7 @@ const DICT = {
     agenticBullet3: "Planes de remediación en lenguaje natural: parche, workaround, rollback",
     agenticBullet4: "Informes ejecutivos que traducen lo técnico a impacto financiero",
     aiRemediationPlan: "Plan de remediación IA", generatedIn: "Generado en 1,8s por Claude Opus 4.7",
+    tryAgenticNow: "Probar Agentic AI ahora",
     aiPatch: "Parche", aiWorkaround: "Workaround", aiHardening: "Hardening", aiVerify: "Verificar",
     bannerBadge: "Sin registro · Acceso instantáneo",
     bannerTitle1: "Sáltate la llamada comercial.", bannerTitle2: "Míralo en acción ya.",
@@ -300,6 +632,317 @@ const DICT = {
     navThreatDashboard: "Panel de Amenazas", navThreatRegistry: "Registro de Amenazas",
     navBreachCVE: "Brechas y CVE", navCTIReports: "Informes CTI",
     navHackRisk: "Hack Risk Score", navVLM: "Ciclo de Vulnerabilidades",
+    navACSA: "Security Assurance",
+    // ===== ACSA MODULE =====
+    acsaNavServices: "Servicios",
+    acsaNavDetail: "ACSA",
+    acsaNavScoping: "Scoping",
+    acsaNavProposals: "Propuestas",
+    acsaNavTracker: "Tracker",
+    acsaFooterLeft: "Praxis·Agentic Practice · Módulo interno de plataforma",
+    acsaFooterRight: "Metodología ACSA v1.0 · 30 abr 2026",
+    acsaWordmarkSubtitle: "CIBERSEGURIDAD · PRÁCTICA",
+    acsaCatalogKicker: "Catálogo de servicios · 2026",
+    acsaCatalogTitle1: "Aseguramiento de seguridad",
+    acsaCatalogTitle2: "para sistemas agénticos.",
+    acsaCatalogIntro: "Cinco servicios diseñados para los huecos de seguridad que el AppSec tradicional, las evaluaciones de modelos y los escáneres SaaS no cubren. Basados en OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF, ISO 42001 y EU AI Act.",
+    acsaNewBadge: "Nuevo · Abril 2026",
+    acsaNewSubtitle: "Auditoría de Código de Agentes",
+    acsaReadMethodology: "Ver metodología",
+    acsaSectionFiveTitle: "Los cinco servicios",
+    acsaPublicBeta: "Beta Pública",
+    acsaActionOpen: "Abrir",
+    acsaSvcSTM: "Modelado de Amenazas IA",
+    acsaSvcSTMLine: "Análisis de amenazas en diseño para sistemas agénticos",
+    acsaSvcSTMDesc: "Modelado STRIDE/PASTA adaptado para arquitecturas con LLMs y multi-agente, basado en MITRE ATLAS.",
+    acsaSvcART: "Red Teaming de Agentes",
+    acsaSvcARTLine: "Pruebas adversariales en runtime de agentes desplegados",
+    acsaSvcARTDesc: "Sondeo adversarial de agentes en su entorno runtime: prompt injection, abuso de herramientas, jailbreaks, exfiltración.",
+    acsaSvcASR: "Revisión de Arquitectura de Seguridad IA",
+    acsaSvcASRLine: "Evaluación arquitectónica end-to-end",
+    acsaSvcASRDesc: "Revisión de arquitectura de referencia cubriendo identidad, aislamiento, flujos de datos, controles y resiliencia para sistemas IA.",
+    acsaSvcGOV: "Preparación de Gobernanza IA",
+    acsaSvcGOVLine: "Preparación para ISO 42001 y EU AI Act",
+    acsaSvcGOVDesc: "Evaluación de controles y preparación de evidencias para ISO 42001, obligaciones de alto riesgo del EU AI Act, y NIST AI RMF.",
+    acsaSvcACSA: "Auditoría de Código de Agentes",
+    acsaSvcACSALine: "Auditoría a nivel de código para sistemas agénticos",
+    acsaSvcACSADesc: "Auditoría estática de tarifa fija del código de agentes combinando Claude Security (Opus 4.7) con interpretación experta del contexto agéntico.",
+    acsaWeeks23: "2–3 semanas",
+    acsaWeeks34: "3–4 semanas",
+    acsaWeeks3: "3 semanas",
+    acsaWeeks46: "4–6 semanas",
+    acsaDays1015: "10–15 días",
+    acsaDetailTagSvc: "SVC · 05 / ACSA",
+    acsaDetailTagBeta: "Beta pública · 30 abr 2026",
+    acsaDetailTitle1: "Auditoría de",
+    acsaDetailTitle2: "Código de Agentes.",
+    acsaDetailIntro: "Auditoría de tarifa fija y plazo cerrado del código fuente que orquesta LLMs, herramientas y servidores MCP — combinando Claude Security de Anthropic con interpretación experta del contexto agéntico.",
+    acsaCtaScoping: "Abrir calculadora de scoping",
+    acsaCtaTracker: "Tracker en vivo",
+    acsaCtaBackCatalogue: "Volver al catálogo",
+    acsaAtAGlance: "De un vistazo",
+    acsaAtAGlanceDuration: "Duración",
+    acsaAtAGlanceDurationVal: "10–15 días laborables",
+    acsaAtAGlanceCalendar: "Calendario",
+    acsaAtAGlanceCalendarVal: "3 semanas end-to-end",
+    acsaAtAGlancePricing: "Precio",
+    acsaAtAGlancePricingVal: "Tarifa fija · 3 niveles",
+    acsaAtAGlanceBand: "Banda",
+    acsaAtAGlanceBandVal: "$24k – $78k",
+    acsaAtAGlanceTeam: "Equipo",
+    acsaAtAGlanceTeamVal: "Lead + Sr. Ing + QA",
+    acsaAtAGlanceTool: "Herramienta principal",
+    acsaAtAGlanceToolVal: "Claude Security · Opus 4.7",
+    acsaPillar1H: "Claude Security en el núcleo",
+    acsaPillar1B: "Opus 4.7 razona entre archivos, traza flujos de datos y ejecuta verificación adversarial — capturando vulnerabilidades dependientes del contexto que los matchers de patrones no detectan.",
+    acsaPillar2H: "Contexto agéntico, no solo código",
+    acsaPillar2B: "Cada hallazgo se traduce al lenguaje del riesgo agéntico: quién es el atacante upstream, qué herramienta se alcanza, cuál es el radio de impacto.",
+    acsaPillar3H: "Evidencia con calidad de auditoría",
+    acsaPillar3B: "Los hallazgos mapean a OWASP LLM, ATLAS, NIST AI RMF, ISO 42001 y Artículo 15 del EU AI Act — directamente utilizables para consejo y regulador.",
+    acsaMethodologyKicker: "Metodología · v1.0",
+    acsaMethodologyTitle: "Siete fases, gates firmados.",
+    acsaPhaseLabel: "Fase",
+    acsaPhaseDays: "días",
+    acsaPhaseOutput: "Entregable",
+    acsaPhaseActivities: "Actividades",
+    acsaPhasePrev: "Anterior",
+    acsaPhaseNext: "Siguiente",
+    acsaAlignmentKicker: "Alineación",
+    acsaAlignmentTitle: "Cinco frameworks. Un registro.",
+    acsaAlignmentBody: "Cada hallazgo confirmado mapea a un control en cada framework aplicable. El mapeo es la referencia canónica usada en la Fase 4 y se reproduce textualmente en el registro de entregables.",
+    acsaTaxonomyKicker: "Taxonomía agéntica",
+    acsaTaxonomyTitle: "Ocho categorías a las que pertenece cada hallazgo.",
+    acsaCtaCloseTitle: "Define el alcance del proyecto.",
+    acsaCtaCloseBody: "La calculadora de scoping devuelve un nivel, una banda de precio indicativa y un plan de fases ajustado a tu base de código.",
+    acsaCtaCloseBtn: "Abrir calculadora",
+    acsaPhase00: "Pre-engagement y scoping",
+    acsaPhase01: "Inventario de activos y mapeo de superficie",
+    acsaPhase02: "Análisis estático con Claude Security",
+    acsaPhase03: "Interpretación de contexto agéntico",
+    acsaPhase04: "Correlación de frameworks y priorización",
+    acsaPhase05: "Guía de remediación",
+    acsaPhase06: "Reporte y readout ejecutivo",
+    acsaCalcBack: "Volver a ACSA",
+    acsaCalcKicker: "ACSA · Calculadora de Scoping",
+    acsaCalcTitle1: "Inputs dentro.",
+    acsaCalcTitle2: "Nivel y presupuesto fuera.",
+    acsaCalcInputs: "Inputs del proyecto",
+    acsaCalcAgents: "Agentes en alcance",
+    acsaCalcAgentsHint: "Sistemas agénticos distintos",
+    acsaCalcTools: "Implementaciones de herramientas",
+    acsaCalcToolsHint: "Funciones / plugins / capacidades expuestas al LLM",
+    acsaCalcMcp: "Servidores MCP (custom)",
+    acsaCalcMcpHint: "Servidores y clientes MCP propios",
+    acsaCalcLoc: "Líneas de código aprox.",
+    acsaCalcLocHint: "En todos los repositorios en alcance",
+    acsaCalcLangs: "Lenguajes de implementación",
+    acsaCalcLangsHint: "+5% por lenguaje a partir de dos",
+    acsaCalcModifiers: "Modificadores",
+    acsaCalcModEU: "Clasificación de alto riesgo en EU AI Act",
+    acsaCalcModMulti: "Despliegue multi-jurisdicción",
+    acsaCalcModThreat: "Modelo de amenazas + arquitectura documentados",
+    acsaCalcModThreatOn: "−5% descuento por madurez",
+    acsaCalcModThreatOff: "+10% (must-build)",
+    acsaCalcClient: "Cliente (opcional)",
+    acsaCalcOrg: "Organización",
+    acsaCalcContact: "Contacto principal",
+    acsaCalcRecTier: "Nivel recomendado",
+    acsaCalcSurface: "Perfil de superficie",
+    acsaCalcConstrained: "Limitada",
+    acsaCalcExtensive: "Extensa",
+    acsaCalcPriceBand: "Banda de precio indicativa (USD)",
+    acsaCalcWorkingDays: "Días laborables",
+    acsaCalcAdjustment: "Ajuste",
+    acsaCalcPhasePlan: "Plan de fases",
+    acsaCalcSavedBtn: "Guardada",
+    acsaCalcSaveProposal: "Guardar propuesta",
+    acsaCalcViewAll: "Ver todas",
+    acsaCalcAutosaved: "Auto-guardado · almacenamiento de sesión",
+    acsaProfileConstrained: "Limitada",
+    acsaProfileModerate: "Moderada",
+    acsaProfileSubstantial: "Sustancial",
+    acsaProfileExtensive: "Extensa",
+    acsaTierStarter: "Starter",
+    acsaTierStandard: "Standard",
+    acsaTierEnterprise: "Enterprise",
+    acsaTierMultiwave: "Multi-wave",
+    acsaPropBack: "Volver",
+    acsaPropKicker: "Propuestas guardadas",
+    acsaPropTitle1: "Borradores y",
+    acsaPropTitle2: "exportación de SoW.",
+    acsaPropEmptyTitle: "Aún no hay propuestas guardadas",
+    acsaPropEmptyBody: "Usa la calculadora de scoping para definir un proyecto y guárdalo aquí.",
+    acsaPropOpenCalc: "Abrir calculadora",
+    acsaPropUntitled: "Proyecto sin título",
+    acsaPropDelete: "Eliminar",
+    acsaPropTier: "Nivel",
+    acsaPropDays: "Días",
+    acsaPropProfile: "Perfil",
+    acsaPropPriceBand: "Banda de precio indicativa",
+    acsaPropInputs: "Inputs",
+    acsaPropExportSOW: "Exportar borrador de SoW (Markdown)",
+    acsaPropSelectPreview: "Selecciona una propuesta para previsualizar el borrador de SoW.",
+    acsaKVAgents: "Agentes",
+    acsaKVTools: "Herramientas",
+    acsaKVMcp: "Servidores MCP",
+    acsaKVLoc: "LdC",
+    acsaKVLangs: "Lenguajes",
+    acsaKVRegHigh: "Alto riesgo EU AI Act",
+    acsaKVRegMulti: "Multi-jurisdicción",
+    acsaKVThreatModel: "Modelo de amenazas presente",
+    acsaYes: "Sí",
+    acsaNo: "No",
+    acsaTrackerKicker: "Tracker de Proyecto en Vivo · v1.0",
+    acsaTrackerTitle1: "Ejecuta el proyecto.",
+    acsaTrackerTitle2: "Firma los gates.",
+    acsaTrackerIntro: "Un workspace por proyecto ACSA. Sigue actividades, captura hallazgos con scoring de riesgo, firma quality gates y empaqueta los entregables en la Fase 6.",
+    acsaTrackerBtnFromCalc: "Desde calculadora",
+    acsaTrackerBtnNew: "Nuevo proyecto",
+    acsaTrackerEmptyTitle: "No hay proyectos activos",
+    acsaTrackerEmptyBody: "Crea un nuevo proyecto para empezar a trackear fases, gates y hallazgos.",
+    acsaTrackerCreateFirst: "Crear primer proyecto",
+    acsaTrackerActiveTitle: "Proyectos activos",
+    acsaTrackerOnBooks: "en cartera",
+    acsaTrackerLoading: "Cargando proyectos…",
+    acsaCardUntitled: "Sin título",
+    acsaCardStarted: "iniciado",
+    acsaCardProgress: "Progreso",
+    acsaCardGates: "Gates",
+    acsaCardP0P1: "P0/P1",
+    acsaModalKicker: "Nuevo proyecto",
+    acsaModalTitle: "Inicializar tracker",
+    acsaModalEngId: "ID del proyecto",
+    acsaModalTier: "Nivel",
+    acsaModalClient: "Cliente",
+    acsaModalLead: "Practice Lead",
+    acsaModalEngineer: "Ingeniero Senior",
+    acsaModalQA: "Revisor QA",
+    acsaModalStartDate: "Fecha de inicio",
+    acsaModalCancel: "Cancelar",
+    acsaModalCreate: "Crear proyecto",
+    acsaEngBackAll: "Todos los proyectos",
+    acsaEngActive: "Activo",
+    acsaEngLead: "Lead",
+    acsaEngEng: "Ing",
+    acsaEngQA: "QA",
+    acsaEngStarted: "Iniciado",
+    acsaStatTotal: "Total",
+    acsaStatOpen: "Abiertos",
+    acsaTabPhases: "Fases y Gates",
+    acsaTabComponents: "Componentes",
+    acsaTabFindings: "Hallazgos",
+    acsaTabReport: "Reporte",
+    acsaPhProgression: "Progresión de fases",
+    acsaPhActivitiesLabel: "Actividades",
+    acsaGateSigned: "Gate firmado",
+    acsaGatePending: "Gate pendiente",
+    acsaGateSignedBy: "Firmado por",
+    acsaGateDate: "Fecha",
+    acsaGateNote: "Nota",
+    acsaGateRevoke: "Revocar firma",
+    acsaGateSigner: "Firmante",
+    acsaGateNoteLabel: "Nota (opcional)",
+    acsaGateNotePlaceholder: "Cualquier contexto para el audit trail...",
+    acsaGateSignBtn: "Firmar gate",
+    acsaGateNeedActivities: "Completa todas las actividades primero",
+    acsaCompKicker: "Entregable de la Fase 1",
+    acsaCompTitle: "Registro de Componentes del Agente",
+    acsaCompAdd: "Añadir componente",
+    acsaCompNew: "Nuevo componente",
+    acsaCompEditing: "Editando",
+    acsaCompId: "ID del componente",
+    acsaCompType: "Tipo",
+    acsaCompRepo: "Repositorio",
+    acsaCompLang: "Lenguaje",
+    acsaCompPath: "Ruta del archivo",
+    acsaCompUpstream: "Confianza upstream",
+    acsaCompDownstream: "Blast downstream",
+    acsaCompPriority: "Objetivo prioritario",
+    acsaCompPriorityYes: "Sí — marcado para escaneo prioritario en Fase 2",
+    acsaCompPriorityNo: "No",
+    acsaCompNotes: "Notas",
+    acsaCompCancel: "Cancelar",
+    acsaCompSave: "Guardar",
+    acsaCompEmpty: "Aún no hay componentes — añade el inventario de superficie del agente",
+    acsaCompTblID: "ID",
+    acsaCompTblType: "Tipo",
+    acsaCompTblRepo: "Repositorio",
+    acsaCompTblTrust: "Trust → Blast",
+    acsaCompTblPriority: "Prioridad",
+    acsaCompPriorityChip: "Prioritario",
+    acsaFindKicker: "Registro de hallazgos",
+    acsaFindTitle: "Hallazgos de vulnerabilidad",
+    acsaFindAdd: "Añadir hallazgo",
+    acsaFindNew: "Nuevo hallazgo",
+    acsaFindEditing: "Editando",
+    acsaFindComputed: "Calculado",
+    acsaFindId: "ID",
+    acsaFindFTitle: "Título",
+    acsaFindComponent: "Componente (AC-NNN)",
+    acsaFindRepo: "Repositorio",
+    acsaFindFilePath: "Ruta del archivo",
+    acsaFindLineRange: "Rango de líneas",
+    acsaFindDiscovery: "Método de descubrimiento",
+    acsaFindTaxonomy: "Taxonomía agéntica",
+    acsaFindOwasp: "OWASP LLM",
+    acsaFindAtlas: "Técnica ATLAS",
+    acsaFindExcerpt: "Extracto Claude Security + confianza",
+    acsaFindExcerptHint: "Extracto textual del razonamiento con factor de confianza...",
+    acsaFindNarrative: "Narrativa de explotación (5 preguntas)",
+    acsaFindNarrativeHint: "¿Quién es el atacante upstream? ¿Qué input no confiable entra? ¿Qué herramienta/capacidad alcanza? ¿Cuál es el radio de impacto downstream? ¿Qué controles existentes reducen la probabilidad realista?",
+    acsaFindLikelihood: "Probabilidad",
+    acsaFindImpact: "Impacto",
+    acsaFindAmplification: "Amplificación agéntica",
+    acsaFindAmpLow: "1.0 — pasivo",
+    acsaFindAmpHigh: "2.5 — autónomo + privilegiado",
+    acsaFindRemediation: "Remediación (plantilla de patch + temática)",
+    acsaFindPreventive: "Control preventivo",
+    acsaFindRegulatory: "Etiqueta regulatoria",
+    acsaFindStatus: "Estado",
+    acsaFindReviewer: "Revisor",
+    acsaFindReviewDate: "Fecha de revisión",
+    acsaFindCancel: "Cancelar",
+    acsaFindSave: "Guardar hallazgo",
+    acsaFindFilterAll: "Todos",
+    acsaFindSearch: "Buscar hallazgos...",
+    acsaFindOf: "de",
+    acsaFindEmptyNone: "Aún no hay hallazgos registrados",
+    acsaFindEmptyFiltered: "Ningún hallazgo coincide con el filtro",
+    acsaFindLikelihoodLabel: "Probabilidad:",
+    acsaFindImpactLabel: "Impacto:",
+    acsaFindAmpLabel: "Amp:",
+    acsaFindOwaspLabel: "OWASP:",
+    acsaLvlLow: "Baja",
+    acsaLvlMedium: "Media",
+    acsaLvlHigh: "Alta",
+    acsaLvlCritical: "Crítica",
+    acsaStOpen: "Abierto",
+    acsaStAck: "Reconocido",
+    acsaStMitigated: "Mitigado",
+    acsaStAccepted: "Riesgo aceptado",
+    acsaStFalsePositive: "Falso positivo",
+    acsaRepKicker: "Fase 6 — Reporte",
+    acsaRepTitle: "Checklist de calidad de 12 puntos",
+    acsaRepProgress: "Progreso",
+    acsaRepNeedAll: "Completa los 12 puntos antes de firmar el Gate 4",
+    acsaRepSummaryKicker: "Resumen del proyecto",
+    acsaRepFindings: "Hallazgos",
+    acsaRepAvgScore: "Score medio",
+    acsaRepBundleKicker: "Paquete de entregables",
+    acsaRepExportSummary: "Resumen ejecutivo (Markdown)",
+    acsaRepExportCsv: "Registro de hallazgos (CSV)",
+    acsaRepExportJson: "Proyecto completo (JSON)",
+    acsaRepBundleNote: "Para el reporte de auditoría DOCX y el deck ejecutivo PPTX, usa las plantillas de Fase 6 del repositorio de la práctica.",
+    acsaRepGate4Signed: "Gate 4 firmado",
+    acsaRepGate4Pending: "Gate 4 pendiente",
+    acsaRepGate4Title: "Reporte final",
+    acsaRepGate4SignedBody: "Firmado por {signer} el {date}",
+    acsaRepGate4PendingBody: "Firma el Gate 4 desde la pestaña Fases una vez completo el checklist de 12 puntos.",
+    acsaRepDeleteQuestion: "¿Eliminar este proyecto?",
+    acsaRepDeleteWarning: "Esto elimina permanentemente todos los hallazgos, componentes y firmas de gates. No se puede deshacer.",
+    acsaRepDeleteCancel: "Cancelar",
+    acsaRepDeleteConfirm: "Confirmar eliminación",
+    acsaRepDeleteEng: "Eliminar proyecto",
     navBenchmark: "Benchmark de Plataformas",
     sectionIntelligence: "Inteligencia", sectionRiskCompliance: "Riesgo y Cumplimiento",
     agenticSidebar: "Agentes autónomos con Claude Opus 4.7 investigan, clasifican y remedian amenazas.",
@@ -359,7 +1002,7 @@ const DICT = {
     cvePublished: "Publicado",
     reportsHeroBadge: "Suscripción de Inteligencia de Amenazas",
     reportsHeroTitle: "+130 informes por trimestre",
-    reportsHeroSubtitle: "Noticias diarias, monitorización ransomware, fugas de credenciales, hacktivismo, tendencias sectoriales. Inspirado en Telefónica Tech, ampliado con más tipos.",
+    reportsHeroSubtitle: "Noticias diarias, monitorización ransomware, fugas de credenciales, hacktivismo, tendencias sectoriales. Curado por nuestros analistas e impulsado por Agentic AI.",
     reportsTabPublic: "Landing pública", reportsTabAdmin: "Panel admin", reportsTabArchive: "Archivo",
     riskHeroBadge: "Hack Risk Score · Gestión de Superficie de Ataque Externa",
     riskHeroTitle: "Mira tu empresa como la mira un atacante",
@@ -444,7 +1087,7 @@ const DICT = {
            h: ["Tres modos: Recientes, Buscar, Brechas", "Cada hallazgo enlaza a NVD y MITRE", "Úsalo cuando un CVE sea noticia"] },
       3: { title: "Informes CTI", headline: "+130 informes de inteligencia por trimestre",
            body: "Los suscriptores reciben 11 tipos de informes: noticias diarias, monitorización de ransomware, fugas de credenciales, hacktivismo, tendencias sectoriales y más. Gestiona suscriptores, genera informes, navega el archivo.",
-           h: ["Landing pública + panel admin + archivo de informes", "Los informes se auto-generan desde tus datos de amenazas en vivo", "Inspirado en Telefónica Tech · más tipos de informes"] },
+           h: ["Landing pública + panel admin + archivo de informes", "Los informes se auto-generan desde tus datos de amenazas en vivo", "11 tipos de informes curados por analistas"] },
       4: { title: "Hack Risk Score", headline: "Mira tu empresa como la mira un atacante",
            body: "Gestión de superficie de ataque externa. Introduce un dominio y recibe una puntuación 0-100 en 8 dimensiones: superficie, credenciales filtradas, vulnerabilidades, SSL/TLS, email, DNS, dark web, postura cloud. Más mapeo de cumplimiento a NIST/ISO/NIS2/GDPR/DORA.",
            h: ["8 fases de escaneo en tiempo real", "Guía de remediación por cada hallazgo", "Informe compartible con token de 7 días"] },
@@ -647,6 +1290,7 @@ const DASHBOARD_NAV = [
   { id: "reports", labelKey: "navCTIReports", icon: FileText },
   { id: "risk", labelKey: "navHackRisk", icon: Target },
   { id: "vlm", labelKey: "navVLM", icon: Cpu },
+  { id: "acsa", labelKey: "navACSA", icon: ScrollText },
   { id: "study", labelKey: "navBenchmark", icon: BarChart3 },
 ];
 
@@ -673,7 +1317,7 @@ const TOUR_STEPS = [
     tab: "reports", icon: FileText, title: "CTI Reports",
     headline: "130+ intelligence reports per quarter",
     body: "Subscribers receive 11 types of reports covering daily threat news, ransomware monitoring, credential leaks, hacktivism, sectorial trends and more. Manage subscribers, generate reports, browse the archive.",
-    highlight: ["Public landing + admin panel + report archive", "Reports are auto-generated from your live threat data", "Inspired by Telefónica Tech · more report types"],
+    highlight: ["Public landing + admin panel + report archive", "Reports are auto-generated from your live threat data", "11 report types curated by analysts"],
   },
   {
     tab: "risk", icon: Target, title: "Hack Risk Score",
@@ -686,6 +1330,12 @@ const TOUR_STEPS = [
     headline: "Beyond Tenable, InsightVM & ManageEngine",
     body: "The full Discover → Prioritize → Evaluate → Report → Remediate → Verify cycle. Real Risk score (CVSS × criticality × environment), SLA tracking, CISA KEV badges, kanban-style remediation workflow and 6 deliverable types.",
     highlight: ["Click any vulnerability for Claude Opus 4.7 remediation plan", "AI generates: patch, workaround, hardening, verify, rollback", "This is what sets us apart in the VM market"],
+  },
+  {
+    tab: "acsa", icon: ScrollText, title: "Security Assurance for Agentic Systems",
+    headline: "Audit-grade assurance for AI agents",
+    body: "A consulting practice surface for delivering five engagement types — including the flagship ACSA (Agent Codebase Security Audit). Scope, sign quality gates, capture findings with risk scoring against OWASP LLM Top 10, MITRE ATLAS, NIST AI RMF, ISO 42001 and EU AI Act.",
+    highlight: ["5 engagement types · ACSA flagship audit (10–15 days)", "Live tracker with phase progression and signed gates", "Findings register exports CSV/Markdown/JSON"],
   },
   {
     tab: "study", icon: BarChart3, title: "Platform Benchmark",
@@ -706,6 +1356,20 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
   const [tourStep, setTourStep] = useState(0);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const intervalRef = useRef(null);
+
+  // Body scroll lock + ESC to close drawer
+  useEffect(() => {
+    if (mobileNavOpen) {
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      const onKey = (e) => { if (e.key === "Escape") setMobileNavOpen(false); };
+      window.addEventListener("keydown", onKey);
+      return () => {
+        document.body.style.overflow = previousOverflow;
+        window.removeEventListener("keydown", onKey);
+      };
+    }
+  }, [mobileNavOpen]);
 
   // Cargar amenazas almacenadas al montar
   useEffect(() => {
@@ -782,14 +1446,22 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
       `}</style>
 
       {/* MOBILE BACKDROP */}
-      {mobileNavOpen && (
-        <div className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm md:hidden" onClick={() => setMobileNavOpen(false)} />
-      )}
+      <div
+        className={`fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+          mobileNavOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setMobileNavOpen(false)}
+        aria-hidden="true"
+      />
 
       {/* SIDEBAR (drawer en móvil, fija en desktop) */}
-      <aside className={`w-72 md:w-60 bg-[var(--surface-1)] border-r border-[var(--border)] flex flex-col fixed md:sticky top-0 h-screen z-50 transition-transform duration-300 ${
-        mobileNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-      }`}>
+      <aside
+        className={`w-[80vw] max-w-xs md:w-60 bg-[var(--surface-1)] border-r border-[var(--border)] flex flex-col fixed md:sticky top-0 h-screen z-50 shadow-2xl md:shadow-none transition-transform duration-300 ease-out ${
+          mobileNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
+        aria-label="Main navigation"
+        aria-hidden={!mobileNavOpen && typeof window !== "undefined" && window.innerWidth < 768}
+      >
         <div className="px-5 py-5 border-b border-[var(--border)] flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
             <Shield className="w-5 h-5 text-slate-900" strokeWidth={2.5} />
@@ -810,8 +1482,8 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
             const active = tab === n.id;
             return (
               <button key={n.id} onClick={() => { setTab(n.id); setMobileNavOpen(false); }}
-                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition relative ${
-                  active ? "bg-cyan-500/10 text-cyan-700" : "text-slate-800 hover:text-slate-800 hover:bg-slate-100"
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 md:py-2 rounded-lg text-sm md:text-xs transition-all relative ${
+                  active ? "bg-cyan-500/10 text-cyan-700" : "text-slate-800 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200"
                 }`}>
                 {active && <div className="absolute left-0 top-1/4 bottom-1/4 w-0.5 bg-cyan-400 rounded-r-full" />}
                 <I className="w-4 h-4 flex-shrink-0" strokeWidth={active ? 2.5 : 2} />
@@ -825,8 +1497,8 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
             const active = tab === n.id;
             return (
               <button key={n.id} onClick={() => { setTab(n.id); setMobileNavOpen(false); }}
-                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition relative ${
-                  active ? "bg-cyan-500/10 text-cyan-700" : "text-slate-800 hover:text-slate-800 hover:bg-slate-100"
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 md:py-2 rounded-lg text-sm md:text-xs transition-all relative ${
+                  active ? "bg-cyan-500/10 text-cyan-700" : "text-slate-800 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200"
                 }`}>
                 {active && <div className="absolute left-0 top-1/4 bottom-1/4 w-0.5 bg-cyan-400 rounded-r-full" />}
                 <I className="w-4 h-4 flex-shrink-0" strokeWidth={active ? 2.5 : 2} />
@@ -921,17 +1593,18 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
         </header>
 
         {/* TABS HORIZONTAL — siempre visible en móvil, oculta en desktop (ya está la sidebar) */}
-        <div className="md:hidden bg-[var(--surface-1)] border-b border-[var(--border)] sticky top-14 z-20">
-          <div className="flex overflow-x-auto scrollbar-thin px-2 py-2 gap-1.5" style={{ scrollbarWidth: "none" }}>
+        <div className="md:hidden bg-[var(--surface-1)]/95 backdrop-blur-md border-b border-[var(--border)] sticky top-14 z-20">
+          <div className="flex overflow-x-auto scrollbar-thin px-3 py-2.5 gap-2" style={{ scrollbarWidth: "none", scrollSnapType: "x proximity" }}>
             <style>{`.scrollbar-thin::-webkit-scrollbar { display: none; }`}</style>
             {NAV_ITEMS.map(n => {
               const I = n.icon;
               const active = tab === n.id;
               return (
                 <button key={n.id} onClick={() => setTab(n.id)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition flex-shrink-0 ${
+                  style={{ scrollSnapAlign: "start" }}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 active:scale-95 ${
                     active
-                      ? "bg-cyan-500/15 text-cyan-700 border border-cyan-400/40"
+                      ? "bg-cyan-500 text-slate-900 shadow-md shadow-cyan-500/30"
                       : "bg-[var(--surface-2)] text-slate-700 border border-[var(--border)] hover:border-[var(--border-strong)]"
                   }`}>
                   <I className="w-3.5 h-3.5" strokeWidth={active ? 2.5 : 2} />
@@ -950,6 +1623,7 @@ function CyberWatchDashboard({ user = { email: "demo@cyberwatch.io", company: "D
         {tab === "reports" && <ReportsTab threats={threats} />}
         {tab === "risk" && <RiskAssessmentTab threats={threats} />}
         {tab === "vlm" && <VlmTab />}
+        {tab === "acsa" && <AcsaPlatformModule />}
         {tab === "study" && <StudyTab />}
         {tab === "tour" && <TourView
           step={tourStep}
@@ -1448,7 +2122,7 @@ function Row({ label, value, mono }) {
 
 // ============================================================
 // REPORTS TAB - Servicio de informes de ciberinteligencia
-// Réplica del servicio gratuito de Telefónica Tech
+// 11 tipos de informes curados por analistas, suscripción de prueba 90 días
 // ============================================================
 const getReportCatalog = (t) => [
   { id: "daily", icon: Newspaper, title: t("rcDailyTitle"), freq: t("rcFreqDaily"), color: "from-blue-500 to-blue-700", desc: t("rcDailyDesc") },
@@ -1552,7 +2226,7 @@ function ReportsTab({ threats }) {
   );
 }
 
-// ---- LANDING: réplica de la landing de Telefónica Tech ----
+// ---- LANDING: pestaña pública para suscripción a CTI Reports ----
 function LandingView({ onSubscribe }) {
   const { t } = useT();
   const REPORT_CATALOG = getReportCatalog(t);
@@ -3349,10 +4023,20 @@ No uses markdown, solo texto plano con saltos de línea.`;
 function LandingPage({ onNavigate, onQuickExplore }) {
   const { t } = useT();
   const [count, setCount] = useState(2847293);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     const i = setInterval(() => setCount(c => c + Math.floor(Math.random() * 7) + 1), 800);
     return () => clearInterval(i);
   }, []);
+
+  // Cerrar el menú móvil al cambiar a desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMobileMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <div className="min-h-screen bg-[var(--surface-0)] text-slate-900" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
@@ -3371,39 +4055,86 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       `}</style>
 
       {/* NAV */}
-      <nav className="border-b border-cyan-500/10 backdrop-blur-xl bg-slate-900/40 fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/30">
+      <nav className="border-b border-cyan-500/10 backdrop-blur-xl bg-slate-900/85 fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+          <a href="#top" onClick={(e) => { e.preventDefault(); closeMobileMenu(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            className="flex items-center gap-2.5 cursor-pointer group flex-shrink-0">
+            <div className="w-9 h-9 bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-shadow">
               <Shield className="w-5 h-5 text-slate-900" strokeWidth={2.5} />
             </div>
             <div className="leading-tight">
-              <div className="font-semibold tracking-tight">CyberWatch</div>
-              <div className="mono text-[11px] text-cyan-700 uppercase tracking-[0.2em]">XTI · Threat Intelligence</div>
+              <div className="font-semibold tracking-tight text-white group-hover:text-cyan-300 transition-colors text-sm md:text-base">CyberWatch</div>
+              <div className="mono text-[10px] md:text-[11px] text-cyan-400 uppercase tracking-[0.18em]">XTI · Threat Intel</div>
             </div>
-          </div>
-          <div className="hidden md:flex items-center gap-7 text-sm text-slate-800">
-            <a href="#platform" className="hover:text-cyan-700 transition">Platform</a>
-            <a href="#modules" className="hover:text-cyan-700 transition">Modules</a>
-            <a href="#pricing" className="hover:text-cyan-700 transition">Pricing</a>
-            <span className="flex items-center gap-1.5 text-violet-700">
+          </a>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-7 text-sm text-slate-200">
+            <a href="#platform" className="hover:text-cyan-300 transition">Platform</a>
+            <a href="#modules" className="hover:text-cyan-300 transition">Modules</a>
+            <a href="#pricing" className="hover:text-cyan-300 transition">Pricing</a>
+            <a href="#agentic" className="flex items-center gap-1.5 text-violet-300 hover:text-violet-200 transition">
               <Zap className="w-3 h-3" /><span className="text-xs font-medium">Agentic AI</span>
-            </span>
+            </a>
           </div>
-          <div className="flex items-center gap-3">
-            <LangSwitcher variant="light" />
-            <button onClick={() => onNavigate("login")} className="text-sm text-slate-800 hover:text-slate-900 transition">{t("signIn")}</button>
+
+          {/* Right side */}
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="hidden md:flex items-center gap-3">
+              <LangSwitcher variant="light" />
+              <button onClick={() => onNavigate("login")} className="text-sm text-slate-200 hover:text-white transition">{t("signIn")}</button>
+            </div>
             <button onClick={onQuickExplore}
-              className="group text-sm bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 px-4 py-2 rounded-lg font-semibold hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition flex items-center gap-1.5">
+              className="group text-xs md:text-sm bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 px-3 md:px-4 py-2 rounded-lg font-semibold hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition flex items-center gap-1.5 whitespace-nowrap">
               <Zap className="w-3.5 h-3.5" strokeWidth={3} />
-              {t("tryFree7")}
+              <span className="hidden sm:inline">{t("tryFree7")}</span>
+              <span className="sm:hidden">Try free</span>
             </button>
+            {/* Hamburguesa móvil */}
+            <button
+              onClick={() => setMobileMenuOpen(o => !o)}
+              className="md:hidden p-2 -mr-1 rounded-lg text-slate-200 hover:bg-white/5 transition"
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}>
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile drawer (slide-down dentro de la nav) */}
+        <div className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 border-t border-cyan-500/10 ${
+          mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}>
+          <div className="px-4 py-3 space-y-1 bg-slate-900/95 backdrop-blur-xl">
+            <a href="#platform" onClick={closeMobileMenu}
+              className="block px-3 py-3 rounded-lg text-sm text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-300 transition active:bg-cyan-500/20">
+              Platform
+            </a>
+            <a href="#modules" onClick={closeMobileMenu}
+              className="block px-3 py-3 rounded-lg text-sm text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-300 transition active:bg-cyan-500/20">
+              Modules
+            </a>
+            <a href="#pricing" onClick={closeMobileMenu}
+              className="block px-3 py-3 rounded-lg text-sm text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-300 transition active:bg-cyan-500/20">
+              Pricing
+            </a>
+            <a href="#agentic" onClick={closeMobileMenu}
+              className="flex items-center gap-2 px-3 py-3 rounded-lg text-sm text-violet-300 hover:bg-violet-500/10 transition active:bg-violet-500/20">
+              <Zap className="w-3.5 h-3.5" /> Agentic AI
+            </a>
+            <div className="pt-2 mt-2 border-t border-white/5 flex items-center justify-between gap-3">
+              <button onClick={() => { closeMobileMenu(); onNavigate("login"); }}
+                className="flex-1 px-3 py-2.5 rounded-lg text-sm text-slate-200 bg-white/5 hover:bg-white/10 transition">
+                {t("signIn")}
+              </button>
+              <LangSwitcher variant="light" />
+            </div>
           </div>
         </div>
       </nav>
 
       {/* HERO */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
+      <section id="top" className="pt-32 pb-20 px-6 relative overflow-hidden scroll-mt-20">
         <div className="absolute inset-0 grid-pattern opacity-40" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto relative">
@@ -3500,8 +4231,8 @@ function LandingPage({ onNavigate, onQuickExplore }) {
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="border-y border-cyan-500/10 bg-[var(--surface-0)] py-10">
+      {/* STATS — anchor #platform (overview de la plataforma) */}
+      <section id="platform" className="border-y border-cyan-500/10 bg-[var(--surface-0)] py-10 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { n: "+130", l: "reports per quarter", s: "delivered to subscribers" },
@@ -3519,7 +4250,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* MODULES */}
-      <section id="modules" className="py-24 px-6">
+      <section id="modules" className="py-24 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-14">
             <span className="mono text-xs uppercase tracking-[0.25em] text-cyan-400">{t("platformLabel")}</span>
@@ -3563,7 +4294,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* AGENTIC AI SECTION */}
-      <section className="py-24 px-6 relative overflow-hidden border-y border-cyan-500/10">
+      <section id="agentic" className="py-24 px-6 relative overflow-hidden border-y border-cyan-500/10 scroll-mt-20">
         <div className="absolute inset-0 grid-pattern opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto relative">
@@ -3594,6 +4325,13 @@ function LandingPage({ onNavigate, onQuickExplore }) {
                     <span>{bullet}</span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-7">
+                <button onClick={onQuickExplore}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-violet-500 to-cyan-500 text-slate-900 font-semibold text-sm hover:shadow-[0_0_30px_rgba(167,139,250,0.5)] transition">
+                  <Zap className="w-4 h-4" strokeWidth={3} />
+                  {t("tryAgenticNow")}
+                </button>
               </div>
             </div>
             <div className="relative">
@@ -3686,7 +4424,7 @@ function LandingPage({ onNavigate, onQuickExplore }) {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="py-24 px-6">
+      <section id="pricing" className="py-24 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="mono text-xs uppercase tracking-[0.25em] text-cyan-400">{t("pricingLabel")}</span>
@@ -3981,6 +4719,9 @@ export default function CyberWatchSaaS() {
   return (
     <I18nContext.Provider value={{ locale, setLocale, t: (k) => k }}>
       <style>{`
+        /* === SMOOTH SCROLL para navegación con anclas === */
+        html { scroll-behavior: smooth; }
+
         /* === TEMA ADAPTATIVO: respeta el modo del sistema operativo === */
         :root {
           /* MODO CLARO (default) */
@@ -4205,6 +4946,2359 @@ function TourView({ step, totalSteps, onNext, onBack, onJumpTo, onExit, onJumpTo
           })}
         </div>
       </div>
+    </div>
+  );
+}
+
+
+// ============================================================================
+// ACSA PLATFORM MODULE — Security Assurance for Agentic Systems
+// Integrated as a tab inside CyberWatch dashboard.
+// All identifiers prefixed with `Acsa` or scoped to avoid collisions.
+// ============================================================================
+
+const ACSA_T = {
+  paper:    "#F4EFE3",
+  paperAlt: "#EBE4D2",
+  paperDeep:"#E2D9C2",
+  ink:      "#14181F",
+  inkSoft:  "#2B313D",
+  muted:    "#6B6253",
+  navy:     "#1B2433",
+  navyDim:  "#2C3A52",
+  oxblood:  "#7A1F2B",
+  oxbloodD: "#5A1620",
+  amber:    "#B98A2E",
+  ok:       "#3B6E3A",
+  warn:     "#B5651D",
+};
+
+const ACSA_FONT_STYLES = `
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.acsa-scope .f-display { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
+.acsa-scope .f-body    { font-family: 'Manrope', system-ui, sans-serif; }
+.acsa-scope .f-mono    { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.acsa-scope .tracked   { letter-spacing: 0.18em; }
+.acsa-scope .tracked-md{ letter-spacing: 0.10em; }
+
+@keyframes acsa-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.acsa-scope .anim-up { animation: acsa-fade-up 480ms cubic-bezier(.2,.8,.2,1) both; }
+
+.acsa-scope .grain {
+  background-image: radial-gradient(circle at 1px 1px, rgba(20,24,31,.04) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+.acsa-scope .shadow-paper { box-shadow: 0 1px 0 rgba(20,24,31,.06), 0 14px 32px -16px rgba(20,24,31,.18); }
+
+.acsa-scope .input-base {
+  background: white;
+  border: 2px solid rgba(27,36,51,.15);
+  padding: 8px 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #14181F;
+  outline: none;
+  transition: border-color 150ms;
+  width: 100%;
+}
+.acsa-scope .input-base:focus { border-color: #7A1F2B; }
+.acsa-scope textarea.input-base { resize: vertical; min-height: 80px; line-height: 1.5; }
+`;
+
+const acsaGetServices = (t) => [
+  { id: "threat-modeling",  code: "STM",  name: t("acsaSvcSTM"),
+    line: t("acsaSvcSTMLine"),
+    desc: t("acsaSvcSTMDesc"),
+    duration: t("acsaWeeks23"), band: "$28k–$48k", icon: Target },
+  { id: "red-teaming",      code: "ART",  name: t("acsaSvcART"),
+    line: t("acsaSvcARTLine"),
+    desc: t("acsaSvcARTDesc"),
+    duration: t("acsaWeeks34"), band: "$45k–$85k", icon: Network },
+  { id: "architecture-review", code: "ASR", name: t("acsaSvcASR"),
+    line: t("acsaSvcASRLine"),
+    desc: t("acsaSvcASRDesc"),
+    duration: t("acsaWeeks3"), band: "$36k–$62k", icon: Layers },
+  { id: "governance",       code: "GOV",  name: t("acsaSvcGOV"),
+    line: t("acsaSvcGOVLine"),
+    desc: t("acsaSvcGOVDesc"),
+    duration: t("acsaWeeks46"), band: "$52k–$96k", icon: Scale },
+  { id: "acsa",             code: "ACSA", name: t("acsaSvcACSA"),
+    line: t("acsaSvcACSALine"),
+    desc: t("acsaSvcACSADesc"),
+    duration: t("acsaDays1015"), band: "$24k–$78k", icon: FileSearch,
+    isNew: true, isFlagship: true },
+];
+
+const acsaGetPhases = (t) => [
+  { n: "00", name: t("acsaPhase00"),                days: "1–2", icon: ClipboardList,
+    out: "Signed Statement of Work · Scope Baseline",
+    activities: [
+      { id: "00-1", t: "Conduct kick-off workshop with engineering and security stakeholders" },
+      { id: "00-2", t: "Inventory all repositories, branches, and tags in scope" },
+      { id: "00-3", t: "Confirm Claude Security access via authorised mechanism" },
+      { id: "00-4", t: "Define agent boundary: services in scope, dependencies, exclusions" },
+      { id: "00-5", t: "Confirm tier and pricing in Statement of Work" },
+      { id: "00-6", t: "Establish secure findings channel" },
+    ],
+    gate: 0,
+    gateName: "Gate 0 — Scope Baseline signed",
+    gateRequires: "Client representative signs Scope Baseline. No scanning before this gate." },
+  { n: "01", name: t("acsaPhase01"),       days: "2–3", icon: Boxes,
+    out: "Agent Component Register · Threat Surface Map",
+    activities: [
+      { id: "01-1", t: "Build Agent Component Register (all 9 component types)" },
+      { id: "01-2", t: "Construct Agentic Threat Surface Map (upstream trust × downstream blast)" },
+      { id: "01-3", t: "Identify priority targets for Phase 2" },
+      { id: "01-4", t: "Run dependency audit on agent surface only" },
+    ],
+    gate: 1,
+    gateName: "Gate 1 — Priority targets approved",
+    gateRequires: "Practice Lead confirms priority-target list. No Claude Security execution before this gate." },
+  { n: "02", name: t("acsaPhase02"),    days: "3–5", icon: FileSearch,
+    out: "Raw findings export · Triage log · Supplementary SAST",
+    activities: [
+      { id: "02-1", t: "Configure scoped Claude Security scans with adversarial verification" },
+      { id: "02-2", t: "Execute primary scan — capture full reasoning + confidence factors" },
+      { id: "02-3", t: "Execute targeted secondary scans on priority components" },
+      { id: "02-4", t: "Run supplementary Semgrep with LLM/MCP ruleset" },
+      { id: "02-5", t: "Triage outputs: confirmed / tentative / dismissed" },
+    ],
+    gate: null, gateName: null, gateRequires: null },
+  { n: "03", name: t("acsaPhase03"),          days: "2–3", icon: Bot,
+    out: "Contextualised findings · Exploit narratives · Composite chains",
+    activities: [
+      { id: "03-1", t: "Author 5-question Exploit Narrative for every confirmed finding" },
+      { id: "03-2", t: "Classify against agentic taxonomy (8 categories)" },
+      { id: "03-3", t: "Validate exploitability with PoC where ethically permissible" },
+      { id: "03-4", t: "Cross-reference with Threat Surface Map; revise blast radius" },
+      { id: "03-5", t: "Identify composite findings (multi-finding exploit chains)" },
+    ],
+    gate: 2,
+    gateName: "Gate 2 — Findings reviewed & narrated",
+    gateRequires: "Every confirmed finding has Exploit Narrative + reviewer assigned. No risk scoring before this gate." },
+  { n: "04", name: t("acsaPhase04"),  days: "1–2", icon: GitBranch,
+    out: "Risk-prioritised register · Regulatory tags",
+    activities: [
+      { id: "04-1", t: "Map every finding to OWASP LLM Top 10 v1.1" },
+      { id: "04-2", t: "Map every finding to MITRE ATLAS technique" },
+      { id: "04-3", t: "Compute Practice Risk Score with Agentic Amplification" },
+      { id: "04-4", t: "Tier into P0 / P1 / P2 / P3" },
+      { id: "04-5", t: "Tag EU AI Act, NIS2, DORA, ISO 42001 implications" },
+    ],
+    gate: 3,
+    gateName: "Gate 3 — Lead review complete",
+    gateRequires: "Practice Lead has reviewed all narratives + risk scores. No client delivery before this gate." },
+  { n: "05", name: t("acsaPhase05"),                    days: "1–2", icon: Settings2,
+    out: "Remediation playbook · Patch templates · Preventive controls",
+    activities: [
+      { id: "05-1", t: "Produce patch template for every P0 and P1 finding" },
+      { id: "05-2", t: "Group P2 findings into thematic remediation campaigns" },
+      { id: "05-3", t: "Document preventive controls per finding class" },
+      { id: "05-4", t: "Configure ongoing Claude Security scheduled scans" },
+    ],
+    gate: null, gateName: null, gateRequires: null },
+  { n: "06", name: t("acsaPhase06"),           days: "1",   icon: ScrollText,
+    out: "Audit report · Findings register · Exec deck · Engineering walkthrough",
+    activities: [
+      { id: "06-1", t: "Compile audit report (board-readable + engineering annex)" },
+      { id: "06-2", t: "Run 12-point report quality checklist" },
+      { id: "06-3", t: "Deliver executive readout (60–90 min)" },
+      { id: "06-4", t: "Conduct engineering walkthrough on every P0/P1" },
+      { id: "06-5", t: "Hand-off into client issue tracker" },
+    ],
+    gate: 4,
+    gateName: "Gate 4 — Final report passes 12-point checklist",
+    gateRequires: "12-point checklist signed by Practice Lead. No executive readout before this gate." },
+];
+
+// Alias canónico (en EN) para helpers que no son componentes React y no tienen acceso a t().
+// Se usa solo para iterar IDs de actividades, gates, y nombres en exports.
+const ACSA_PHASES = acsaGetPhases((k) => {
+  // Mapeo manual de las claves de fase a EN
+  const m = {
+    acsaPhase00: "Pre-engagement & scoping",
+    acsaPhase01: "Asset inventory & surface mapping",
+    acsaPhase02: "Static analysis with Claude Security",
+    acsaPhase03: "Agentic context interpretation",
+    acsaPhase04: "Framework correlation & prioritisation",
+    acsaPhase05: "Remediation guidance",
+    acsaPhase06: "Reporting & executive readout",
+  };
+  return m[k] || k;
+});
+
+const ACSA_FRAMEWORKS = [
+  { id: "owasp", name: "OWASP LLM Top 10",  ver: "v1.1",    coverage: "Direct: LLM01, LLM02, LLM04–LLM08" },
+  { id: "atlas", name: "MITRE ATLAS",       ver: "current", coverage: "T0051, T0053, T0048, T0024, T0040" },
+  { id: "nist",  name: "NIST AI RMF",       ver: "1.0",     coverage: "MEASURE 2.6, 2.7 · MANAGE 2.3" },
+  { id: "iso",   name: "ISO/IEC 42001",     ver: "2023",    coverage: "A.6.2.6 · A.6.2.4 · A.8.2 · A.9.3" },
+  { id: "euai",  name: "EU AI Act",         ver: "2024",    coverage: "Article 15(4)(5) · Recital 76" },
+];
+
+const ACSA_TAXONOMY = [
+  "Prompt-injection enabler", "Tool abuse", "Output-handling flaw",
+  "Authorisation bypass", "Exfiltration vector", "Supply-chain risk",
+  "Secret leakage", "Denial of service",
+];
+const ACSA_OWASP_LLM = [
+  "LLM01 — Prompt Injection", "LLM02 — Insecure Output Handling",
+  "LLM03 — Training Data Poisoning", "LLM04 — Model Denial of Service",
+  "LLM05 — Supply Chain Vulnerabilities", "LLM06 — Sensitive Information Disclosure",
+  "LLM07 — Insecure Plugin Design", "LLM08 — Excessive Agency",
+  "LLM09 — Overreliance", "LLM10 — Model Theft",
+];
+const ACSA_ATLAS = [
+  "AML.T0051 — LLM Prompt Injection", "AML.T0053 — LLM Plugin Compromise",
+  "AML.T0054 — LLM Jailbreak", "AML.T0048 — External Harms",
+  "AML.T0024 — Exfiltration via ML Inference API", "AML.T0040 — ML Model Inference API Access",
+];
+const ACSA_REG_TAGS = ["EU AI Act", "NIS2", "DORA", "ISO 42001", "GDPR", "Multiple", "None"];
+const ACSA_LEVELS = ["Low", "Medium", "High", "Critical"];
+const ACSA_STATUS = ["Open", "Acknowledged", "Mitigated", "Accepted risk", "False positive"];
+const ACSA_COMPONENT_TYPES = [
+  "tool", "mcp_server", "mcp_client", "prompt_layer", "output_parser",
+  "auth_layer", "memory", "credential_handler", "orchestrator",
+];
+const ACSA_REPORT_CHECKLIST = [
+  "Executive summary fits on one page and is jargon-controlled",
+  "Every P0 and P1 finding has a patch template",
+  "Every finding has an Exploit Narrative and framework mapping",
+  "Composite findings documented separately, not double-counted",
+  "Risk scores computed using canonical formula; rationale recorded",
+  "No client-identifying information leaks across engagements",
+  "Remediation guidance is actionable without further consultation",
+  "Regulatory tags present where applicable",
+  "Annexes complete and cross-referenced from the body",
+  "Version, classification, and authorship metadata correct",
+  "Distribution list approved by client",
+  "Practice Lead has signed the report",
+];
+
+// Storage keyspaces
+const ACSA_CALC_KEY        = "acsa:calculator:state";
+const ACSA_PROPOSALS_KEY   = "acsa:proposals:list";
+const ACSA_ENG_LIST_KEY    = "acsa:tracker:engagements:list";
+const acsa_eng_key = (id) => `acsa:tracker:engagement:${id}`;
+
+async function acsaLoadStored(key, fallback) {
+  try {
+    if (typeof window === "undefined" || !window.storage) return fallback;
+    const r = await window.storage.get(key);
+    return r ? JSON.parse(r.value) : fallback;
+  } catch { return fallback; }
+}
+async function acsaSaveStored(key, value) {
+  try {
+    if (typeof window === "undefined" || !window.storage) return;
+    await window.storage.set(key, JSON.stringify(value));
+  } catch {}
+}
+async function acsaDeleteStored(key) {
+  try {
+    if (typeof window === "undefined" || !window.storage) return;
+    await window.storage.delete(key);
+  } catch {}
+}
+
+// Scoring + scoping
+const acsaLevelToInt = (l) => Math.max(1, ACSA_LEVELS.indexOf(l) + 1);
+const acsaComputeScore = (likelihood, impact, amp) => {
+  if (!likelihood || !impact || amp == null) return null;
+  return acsaLevelToInt(likelihood) * acsaLevelToInt(impact) * Number(amp);
+};
+const acsaScoreToTier = (score) => {
+  if (score == null) return null;
+  if (score >= 30) return "P0";
+  if (score >= 15) return "P1";
+  if (score >= 6) return "P2";
+  return "P3";
+};
+const acsaTierColor = (t) => ({ P0: ACSA_T.oxblood, P1: ACSA_T.warn, P2: ACSA_T.amber, P3: ACSA_T.ok }[t] || ACSA_T.muted);
+
+function acsaComputeScoping({ agents, tools, mcpServers, loc, langs, regHigh, regMulti, hasThreatModel }) {
+  let tier;
+  if (agents <= 1 && tools <= 3 && mcpServers <= 1 && loc <= 25_000) tier = "Starter";
+  else if (agents <= 3 && tools <= 10 && mcpServers <= 3 && loc <= 100_000) tier = "Standard";
+  else if (agents <= 10 && tools <= 30 && mcpServers <= 8 && loc <= 400_000) tier = "Enterprise";
+  else tier = "Multi-wave";
+
+  const baseBands = {
+    Starter:    [24_000, 36_000, 10],
+    Standard:   [42_000, 60_000, 12],
+    Enterprise: [65_000, 78_000, 15],
+    "Multi-wave":[78_000, 78_000, 15],
+  };
+  const [low, high, days] = baseBands[tier];
+
+  let mult = 1.0;
+  if (langs > 2) mult *= 1 + 0.05 * (langs - 2);
+  if (regHigh)   mult *= 1.10;
+  if (regMulti)  mult *= 1.05;
+  mult *= hasThreatModel ? 0.95 : 1.10;
+
+  const adjLow  = Math.round(low  * mult / 500) * 500;
+  const adjHigh = Math.round(high * mult / 500) * 500;
+  const surfaceScore = Math.min(100, agents * 6 + tools * 3 + mcpServers * 5 + Math.log10(Math.max(loc,1)) * 8);
+  const profile = surfaceScore < 25 ? "Constrained" :
+                  surfaceScore < 55 ? "Moderate" :
+                  surfaceScore < 80 ? "Substantial" : "Extensive";
+
+  const phaseDays = {
+    "00": Math.max(1, Math.round(days * 0.10)),
+    "01": Math.max(2, Math.round(days * 0.18)),
+    "02": Math.max(3, Math.round(days * 0.30)),
+    "03": Math.max(2, Math.round(days * 0.18)),
+    "04": Math.max(1, Math.round(days * 0.10)),
+    "05": Math.max(1, Math.round(days * 0.08)),
+    "06": Math.max(1, Math.round(days * 0.06)),
+  };
+  return {
+    tier, days, adjLow, adjHigh, mult,
+    surfaceScore: Math.round(surfaceScore),
+    profile, phaseDays,
+    multiplierBreakdown: {
+      languages: langs > 2 ? +(0.05 * (langs - 2)).toFixed(2) : 0,
+      regHighRisk: regHigh ? 0.10 : 0,
+      multiJurisdiction: regMulti ? 0.05 : 0,
+      maturity: hasThreatModel ? -0.05 : 0.10,
+    }
+  };
+}
+
+function acsaNewEngagement(form) {
+  const activityState = {};
+  ACSA_PHASES.forEach(ph => ph.activities.forEach(a => { activityState[a.id] = false; }));
+  const gateState = {};
+  ACSA_PHASES.filter(p => p.gate != null).forEach(ph => {
+    gateState[`gate-${ph.gate}`] = { signed: false, signer: null, date: null, note: null };
+  });
+  return {
+    id: form.id,
+    created: new Date().toISOString(),
+    client: form.client,
+    tier: form.tier,
+    leadName: form.leadName,
+    engineerName: form.engineerName,
+    qaName: form.qaName,
+    startDate: form.startDate,
+    status: "active",
+    activityState, gateState,
+    findings: [], components: [],
+    reportChecklist: ACSA_REPORT_CHECKLIST.map(c => ({ text: c, checked: false })),
+    notes: "",
+  };
+}
+
+// =============================================================================
+// ACSA UI primitives (prefixed)
+// =============================================================================
+function AcsaWordmark() {
+  const { t } = useT();
+  return (
+    <div className="flex items-center gap-3">
+      <div className="w-9 h-9 border-2 flex items-center justify-center" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+        <div className="w-3 h-3" style={{background: ACSA_T.oxblood}}/>
+      </div>
+      <div className="leading-none">
+        <div className="f-display text-lg font-bold tracking-tight" style={{color: ACSA_T.ink}}>
+          Praxis<span style={{color: ACSA_T.oxblood}}>·</span>Agentic
+        </div>
+        <div className="f-mono text-[10px] tracked mt-0.5" style={{color: ACSA_T.muted}}>
+          {t("acsaWordmarkSubtitle")}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AcsaChip({ children, color = ACSA_T.muted, bg, size = "sm" }) {
+  const fontSize = size === "xs" ? "10px" : size === "lg" ? "13px" : "11px";
+  return (
+    <span className="f-mono tracked uppercase inline-flex items-center px-2 py-0.5"
+      style={{
+        color: bg ? ACSA_T.paper : color,
+        background: bg || "transparent",
+        border: bg ? "none" : `1px solid ${color}`,
+        fontWeight: 600, fontSize, letterSpacing: "0.1em",
+      }}>{children}</span>
+  );
+}
+
+function AcsaBtn({ children, onClick, variant = "primary", size = "md", icon: Icon, disabled, type = "button" }) {
+  const styles = {
+    primary:   { bg: ACSA_T.oxblood, fg: ACSA_T.paper, border: ACSA_T.oxblood },
+    secondary: { bg: ACSA_T.paper,   fg: ACSA_T.ink,   border: ACSA_T.ink },
+    ghost:     { bg: "transparent", fg: ACSA_T.muted, border: "transparent" },
+    dark:      { bg: ACSA_T.ink,     fg: ACSA_T.paper, border: ACSA_T.ink },
+    ok:        { bg: ACSA_T.ok,      fg: ACSA_T.paper, border: ACSA_T.ok },
+  };
+  const s = styles[variant] || styles.primary;
+  const padding = size === "sm" ? "6px 12px" : size === "lg" ? "12px 20px" : "9px 16px";
+  const fontSize = size === "sm" ? "11px" : "12px";
+  return (
+    <button onClick={onClick} disabled={disabled} type={type}
+      className="f-mono tracked-md uppercase inline-flex items-center gap-1.5 transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+      style={{ background: s.bg, color: s.fg, border: `1.5px solid ${s.border}`, padding, fontSize, fontWeight: 600 }}>
+      {Icon && <Icon size={size === "sm" ? 12 : 14}/>}
+      {children}
+    </button>
+  );
+}
+
+function AcsaField({ label, value, onChange, type = "text", className = "" }) {
+  return (
+    <label className={`block ${className}`}>
+      <div className="f-mono text-[10px] tracked uppercase mb-1.5" style={{color: ACSA_T.muted}}>{label}</div>
+      <input type={type} value={value || ""} onChange={e => onChange(e.target.value)} className="input-base"/>
+    </label>
+  );
+}
+function AcsaSelectField({ label, value, options, onChange, className = "" }) {
+  return (
+    <label className={`block ${className}`}>
+      <div className="f-mono text-[10px] tracked uppercase mb-1.5" style={{color: ACSA_T.muted}}>{label}</div>
+      <select value={value || ""} onChange={e => onChange(e.target.value)} className="input-base appearance-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B6253' width='16' height='16'><path d='M7 10l5 5 5-5z'/></svg>")`,
+          backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center", paddingRight: 30,
+        }}>
+        <option value="">—</option>
+        {options.map(o => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </label>
+  );
+}
+function AcsaTextareaField({ label, value, onChange, rows = 3, className = "", placeholder }) {
+  return (
+    <label className={`block ${className}`}>
+      <div className="f-mono text-[10px] tracked uppercase mb-1.5" style={{color: ACSA_T.muted}}>{label}</div>
+      <textarea value={value || ""} onChange={e => onChange(e.target.value)} rows={rows}
+        placeholder={placeholder} className="input-base"/>
+    </label>
+  );
+}
+
+// ACSA internal navigation
+function AcsaNavBar({ view, setView, proposalsCount, engagementsCount, activeEngagementId }) {
+  const { t } = useT();
+  const items = [
+    { id: "catalog",   label: t("acsaNavServices") },
+    { id: "detail",    label: t("acsaNavDetail") },
+    { id: "calc",      label: t("acsaNavScoping") },
+    { id: "proposals", label: `${t("acsaNavProposals")}${proposalsCount ? ` · ${proposalsCount}` : ""}` },
+    { id: "tracker",   label: `${t("acsaNavTracker")}${engagementsCount ? ` · ${engagementsCount}` : ""}` },
+  ];
+  return (
+    <header
+      className="border-b sticky z-20 backdrop-blur-sm top-[6.75rem] md:top-14"
+      style={{borderColor: "rgba(27,36,51,.12)", background: "rgba(244,239,227,.92)"}}>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-4">
+        <button onClick={() => setView("catalog")} className="flex items-center gap-3 cursor-pointer flex-shrink-0">
+          <AcsaWordmark/>
+        </button>
+        <nav className="flex items-center gap-0.5 md:gap-1 overflow-x-auto scrollbar-thin" style={{scrollbarWidth: "none"}}>
+          <style>{`.scrollbar-thin::-webkit-scrollbar { display: none; }`}</style>
+          {items.map(it => (
+            <button key={it.id}
+              onClick={() => setView(it.id)}
+              className="f-mono text-[11px] md:text-xs tracked-md uppercase px-2.5 md:px-3 py-2 transition-colors whitespace-nowrap active:scale-95"
+              style={{
+                color: view === it.id ? ACSA_T.ink : ACSA_T.muted,
+                borderBottom: view === it.id ? `2px solid ${ACSA_T.oxblood}` : "2px solid transparent",
+                fontWeight: view === it.id ? 700 : 500,
+              }}>
+              {it.label}
+            </button>
+          ))}
+        </nav>
+        {view === "tracker" && activeEngagementId && (
+          <div className="hidden md:block">
+            <AcsaChip color={ACSA_T.oxblood} size="lg">{activeEngagementId}</AcsaChip>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+}
+
+function AcsaCatalogView({ setView, setSelected }) {
+  const { t } = useT();
+  const services = useMemo(() => acsaGetServices(t), [t]);
+  return (
+    <div className="anim-up max-w-7xl mx-auto px-6 py-12">
+      <div className="grid grid-cols-12 gap-8 mb-16">
+        <div className="col-span-12 md:col-span-8">
+          <div className="f-mono text-xs tracked uppercase mb-4" style={{color: ACSA_T.oxblood}}>
+            {t("acsaCatalogKicker")}
+          </div>
+          <h1 className="f-display font-bold leading-[0.92] mb-6" style={{color: ACSA_T.ink, fontSize: "clamp(2.5rem, 6vw, 5rem)"}}>
+            {t("acsaCatalogTitle1")}<br/>
+            <span style={{fontStyle: "italic", color: ACSA_T.oxblood}}>{t("acsaCatalogTitle2")}</span>
+          </h1>
+          <p className="f-body text-lg leading-relaxed max-w-2xl" style={{color: ACSA_T.inkSoft}}>
+            {t("acsaCatalogIntro")}
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-4 flex md:justify-end items-end">
+          <div className="border-l-2 pl-6 py-2" style={{borderColor: ACSA_T.oxblood}}>
+            <div className="f-mono text-[10px] tracked uppercase mb-1" style={{color: ACSA_T.muted}}>{t("acsaNewBadge")}</div>
+            <div className="f-display text-xl font-semibold" style={{color: ACSA_T.ink}}>ACSA</div>
+            <div className="f-body text-sm mt-1" style={{color: ACSA_T.muted}}>{t("acsaNewSubtitle")}</div>
+            <button
+              onClick={() => { setSelected("acsa"); setView("detail"); }}
+              className="f-mono text-xs tracked-md uppercase mt-3 inline-flex items-center gap-1.5 hover:gap-2.5 transition-all"
+              style={{color: ACSA_T.oxblood}}>
+              {t("acsaReadMethodology")} <ArrowRight size={14}/>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t pt-8" style={{borderColor: ACSA_T.ink}}>
+        <div className="flex items-baseline justify-between mb-6">
+          <h2 className="f-display text-2xl font-semibold" style={{color: ACSA_T.ink}}>{t("acsaSectionFiveTitle")}</h2>
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>SVC · 01 → 05</div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{background: "rgba(27,36,51,.12)"}}>
+          {services.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <button key={s.id}
+                onClick={() => { setSelected(s.id); if (s.id === "acsa") setView("detail"); }}
+                disabled={s.id !== "acsa"}
+                className="relative text-left p-7 transition-all group disabled:cursor-default"
+                style={{
+                  background: s.isFlagship ? ACSA_T.paperAlt : ACSA_T.paper,
+                  cursor: s.id === "acsa" ? "pointer" : "default",
+                  minHeight: 280,
+                }}>
+                {s.isNew && (
+                  <div className="absolute top-4 right-4 f-mono text-[9px] tracked uppercase px-2 py-1" style={{background: ACSA_T.oxblood, color: ACSA_T.paper}}>
+                    {t("acsaPublicBeta")}
+                  </div>
+                )}
+                <div className="flex items-start justify-between mb-5">
+                  <Icon size={28} strokeWidth={1.4} style={{color: s.isFlagship ? ACSA_T.oxblood : ACSA_T.ink}}/>
+                  <div className="f-mono text-[11px] tracked" style={{color: ACSA_T.muted}}>
+                    {String(i+1).padStart(2,'0')} / {s.code}
+                  </div>
+                </div>
+                <h3 className="f-display text-xl font-semibold mb-2 leading-tight" style={{color: ACSA_T.ink}}>{s.name}</h3>
+                <p className="f-body text-sm mb-4" style={{color: ACSA_T.inkSoft}}>{s.line}</p>
+                <p className="f-body text-xs leading-relaxed mb-5" style={{color: ACSA_T.muted}}>{s.desc}</p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t" style={{borderColor: "rgba(27,36,51,.15)"}}>
+                  <div>
+                    <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{s.duration}</div>
+                    <div className="f-mono text-sm font-semibold mt-0.5" style={{color: ACSA_T.ink}}>{s.band}</div>
+                  </div>
+                  {s.id === "acsa" && (
+                    <div className="f-mono text-[10px] tracked uppercase flex items-center gap-1 group-hover:gap-2 transition-all" style={{color: ACSA_T.oxblood}}>
+                      {t("acsaActionOpen")} <ChevronRight size={12}/>
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AcsaDetailView({ setView }) {
+  const { t } = useT();
+  const phases = useMemo(() => acsaGetPhases(t), [t]);
+  const [activePhase, setActivePhase] = useState(0);
+
+  return (
+    <div className="anim-up">
+      <div className="border-b" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+        <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="f-mono text-xs tracked uppercase px-2 py-1" style={{background: ACSA_T.ink, color: ACSA_T.paper}}>{t("acsaDetailTagSvc")}</div>
+              <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.oxblood}}>{t("acsaDetailTagBeta")}</div>
+            </div>
+            <h1 className="f-display font-bold leading-[0.95] mb-6" style={{color: ACSA_T.ink, fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)"}}>
+              {t("acsaDetailTitle1")}<br/>
+              <span style={{fontStyle: "italic"}}>{t("acsaDetailTitle2")}</span>
+            </h1>
+            <p className="f-body text-lg leading-relaxed max-w-2xl mb-6" style={{color: ACSA_T.inkSoft}}>
+              {t("acsaDetailIntro")}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <button onClick={() => setView("calc")} className="f-mono text-xs tracked-md uppercase px-5 py-3 inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+                style={{background: ACSA_T.oxblood, color: ACSA_T.paper}}>
+                <Calculator size={14}/> {t("acsaCtaScoping")}
+              </button>
+              <button onClick={() => setView("tracker")} className="f-mono text-xs tracked-md uppercase px-5 py-3 inline-flex items-center gap-2 border hover:bg-black/5 transition-colors"
+                style={{borderColor: ACSA_T.ink, color: ACSA_T.ink}}>
+                <Workflow size={14}/> {t("acsaCtaTracker")}
+              </button>
+              <button onClick={() => setView("catalog")} className="f-mono text-xs tracked-md uppercase px-5 py-3 inline-flex items-center gap-2 border hover:bg-black/5 transition-colors"
+                style={{borderColor: ACSA_T.ink, color: ACSA_T.ink}}>
+                <ChevronLeft size={14}/> {t("acsaCtaBackCatalogue")}
+              </button>
+            </div>
+          </div>
+          <div className="col-span-12 md:col-span-4">
+            <div className="border-2 p-5" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+              <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaAtAGlance")}</div>
+              {[
+                [t("acsaAtAGlanceDuration"), t("acsaAtAGlanceDurationVal")],
+                [t("acsaAtAGlanceCalendar"), t("acsaAtAGlanceCalendarVal")],
+                [t("acsaAtAGlancePricing"), t("acsaAtAGlancePricingVal")],
+                [t("acsaAtAGlanceBand"), t("acsaAtAGlanceBandVal")],
+                [t("acsaAtAGlanceTeam"), t("acsaAtAGlanceTeamVal")],
+                [t("acsaAtAGlanceTool"), t("acsaAtAGlanceToolVal")],
+              ].map(([k,v]) => (
+                <div key={k} className="flex justify-between py-2 border-b last:border-b-0 text-sm" style={{borderColor: "rgba(27,36,51,.1)"}}>
+                  <span className="f-body" style={{color: ACSA_T.muted}}>{k}</span>
+                  <span className="f-body font-medium" style={{color: ACSA_T.ink}}>{v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-px" style={{background: "rgba(27,36,51,.12)"}}>
+        {[
+          { icon: Cpu, h: t("acsaPillar1H"), b: t("acsaPillar1B") },
+          { icon: Bot, h: t("acsaPillar2H"), b: t("acsaPillar2B") },
+          { icon: Award, h: t("acsaPillar3H"), b: t("acsaPillar3B") },
+        ].map((d, i) => {
+          const Icon = d.icon;
+          return (
+            <div key={i} className="p-7" style={{background: ACSA_T.paper}}>
+              <Icon size={24} strokeWidth={1.4} style={{color: ACSA_T.oxblood}}/>
+              <h3 className="f-display text-xl font-semibold mt-4 mb-2" style={{color: ACSA_T.ink}}>{d.h}</h3>
+              <p className="f-body text-sm leading-relaxed" style={{color: ACSA_T.inkSoft}}>{d.b}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="border-y" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="flex items-baseline justify-between mb-8">
+            <div>
+              <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaMethodologyKicker")}</div>
+              <h2 className="f-display text-3xl font-bold" style={{color: ACSA_T.ink}}>{t("acsaMethodologyTitle")}</h2>
+            </div>
+            <div className="f-mono text-[10px] tracked uppercase hidden md:block" style={{color: ACSA_T.muted}}>00 → 06</div>
+          </div>
+
+          <div className="grid grid-cols-7 gap-px mb-8" style={{background: "rgba(27,36,51,.18)"}}>
+            {phases.map((p, i) => (
+              <button key={p.n} onClick={() => setActivePhase(i)}
+                className="text-left p-3 md:p-4 transition-all"
+                style={{
+                  background: activePhase === i ? ACSA_T.ink : ACSA_T.paper,
+                  color: activePhase === i ? ACSA_T.paper : ACSA_T.ink,
+                }}>
+                <div className="f-mono text-[10px] tracked" style={{color: activePhase === i ? ACSA_T.amber : ACSA_T.muted}}>{p.n}</div>
+                <div className="f-display text-xs md:text-sm font-semibold leading-tight mt-1.5">{p.name}</div>
+                <div className="f-mono text-[9px] tracked mt-2 opacity-70">{p.days}d</div>
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-12 gap-6 anim-up" key={activePhase}>
+            <div className="col-span-12 md:col-span-5 border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+              {(() => {
+                const Icon = phases[activePhase].icon;
+                return <Icon size={32} strokeWidth={1.4} style={{color: ACSA_T.oxblood}}/>;
+              })()}
+              <div className="f-mono text-xs tracked uppercase mt-4" style={{color: ACSA_T.muted}}>{t("acsaPhaseLabel")} {phases[activePhase].n} · {phases[activePhase].days} {t("acsaPhaseDays")}</div>
+              <h3 className="f-display text-2xl font-bold mt-1" style={{color: ACSA_T.ink}}>{phases[activePhase].name}</h3>
+              <div className="mt-4 pt-4 border-t" style={{borderColor: "rgba(27,36,51,.15)"}}>
+                <div className="f-mono text-[10px] tracked uppercase mb-2" style={{color: ACSA_T.muted}}>{t("acsaPhaseOutput")}</div>
+                <div className="f-body text-sm font-medium" style={{color: ACSA_T.ink}}>{phases[activePhase].out}</div>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-7">
+              <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaPhaseActivities")}</div>
+              <ol className="space-y-3">
+                {phases[activePhase].activities.map((a, i) => (
+                  <li key={a.id} className="flex gap-4 pb-3 border-b" style={{borderColor: "rgba(27,36,51,.1)"}}>
+                    <div className="f-mono text-xs pt-0.5" style={{color: ACSA_T.oxblood}}>{String(i+1).padStart(2,'0')}</div>
+                    <div className="f-body text-sm leading-relaxed" style={{color: ACSA_T.inkSoft}}>{a.t}</div>
+                  </li>
+                ))}
+              </ol>
+              <div className="flex justify-between mt-6">
+                <button onClick={() => setActivePhase(p => Math.max(0, p-1))} disabled={activePhase === 0}
+                  className="f-mono text-xs tracked-md uppercase inline-flex items-center gap-1 disabled:opacity-30" style={{color: ACSA_T.ink}}>
+                  <ChevronLeft size={14}/> {t("acsaPhasePrev")}
+                </button>
+                <button onClick={() => setActivePhase(p => Math.min(phases.length-1, p+1))} disabled={activePhase === phases.length-1}
+                  className="f-mono text-xs tracked-md uppercase inline-flex items-center gap-1 disabled:opacity-30" style={{color: ACSA_T.ink}}>
+                  {t("acsaPhaseNext")} <ChevronRight size={14}/>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-4">
+            <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaAlignmentKicker")}</div>
+            <h2 className="f-display text-3xl font-bold leading-tight" style={{color: ACSA_T.ink}}>{t("acsaAlignmentTitle")}</h2>
+            <p className="f-body text-sm mt-4 leading-relaxed" style={{color: ACSA_T.inkSoft}}>
+              {t("acsaAlignmentBody")}
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-8 space-y-px" style={{background: "rgba(27,36,51,.12)"}}>
+            {ACSA_FRAMEWORKS.map(fw => (
+              <div key={fw.id} className="grid grid-cols-12 gap-4 px-5 py-4 items-center" style={{background: ACSA_T.paper}}>
+                <div className="col-span-3 f-display font-bold" style={{color: ACSA_T.ink}}>{fw.name}</div>
+                <div className="col-span-2 f-mono text-xs" style={{color: ACSA_T.muted}}>{fw.ver}</div>
+                <div className="col-span-7 f-body text-sm" style={{color: ACSA_T.inkSoft}}>{fw.coverage}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaTaxonomyKicker")}</div>
+          <h2 className="f-display text-3xl font-bold mb-8" style={{color: ACSA_T.ink}}>{t("acsaTaxonomyTitle")}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{background: "rgba(27,36,51,.12)"}}>
+            {ACSA_TAXONOMY.map((tax, i) => (
+              <div key={tax} className="p-5" style={{background: ACSA_T.paper}}>
+                <div className="f-mono text-[10px] tracked" style={{color: ACSA_T.oxblood}}>0{i+1}</div>
+                <div className="f-display font-semibold mt-2 leading-tight" style={{color: ACSA_T.ink}}>{tax}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-16 text-center">
+        <h2 className="f-display text-3xl md:text-4xl font-bold mb-4" style={{color: ACSA_T.ink}}>{t("acsaCtaCloseTitle")}</h2>
+        <p className="f-body max-w-xl mx-auto mb-6" style={{color: ACSA_T.inkSoft}}>{t("acsaCtaCloseBody")}</p>
+        <button onClick={() => setView("calc")} className="f-mono text-xs tracked-md uppercase px-6 py-3 inline-flex items-center gap-2"
+          style={{background: ACSA_T.ink, color: ACSA_T.paper}}>
+          <Calculator size={14}/> {t("acsaCtaCloseBtn")} <ArrowRight size={14}/>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+const ACSA_DEFAULT_CALC = {
+  agents: 2, tools: 6, mcpServers: 2, loc: 60_000, langs: 2,
+  regHigh: false, regMulti: false, hasThreatModel: false,
+  clientName: "", clientContact: "",
+};
+
+function AcsaCalculatorView({ setView, refreshProposals }) {
+  const { t } = useT();
+  const phases = useMemo(() => acsaGetPhases(t), [t]);
+  const [inputs, setInputs] = useState(ACSA_DEFAULT_CALC);
+  const [loaded, setLoaded] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const stored = await acsaLoadStored(ACSA_CALC_KEY, ACSA_DEFAULT_CALC);
+      setInputs(stored); setLoaded(true);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+    const t = setTimeout(() => acsaSaveStored(ACSA_CALC_KEY, inputs), 500);
+    return () => clearTimeout(t);
+  }, [inputs, loaded]);
+
+  const result = useMemo(() => acsaComputeScoping(inputs), [inputs]);
+  const update = (k, v) => setInputs(s => ({ ...s, [k]: v }));
+
+  // Map de profile EN→key i18n
+  const profileLabel = {
+    "Constrained": t("acsaProfileConstrained"),
+    "Moderate":    t("acsaProfileModerate"),
+    "Substantial": t("acsaProfileSubstantial"),
+    "Extensive":   t("acsaProfileExtensive"),
+  }[result.profile] || result.profile;
+
+  const tierLabel = {
+    "Starter":    t("acsaTierStarter"),
+    "Standard":   t("acsaTierStandard"),
+    "Enterprise": t("acsaTierEnterprise"),
+    "Multi-wave": t("acsaTierMultiwave"),
+  }[result.tier] || result.tier;
+
+  const saveProposal = async () => {
+    const list = await acsaLoadStored(ACSA_PROPOSALS_KEY, []);
+    const id = `ACSA-${String(Date.now()).slice(-6)}`;
+    const entry = { id, created: new Date().toISOString(), inputs: { ...inputs }, result: { ...result } };
+    await acsaSaveStored(ACSA_PROPOSALS_KEY, [entry, ...list].slice(0, 30));
+    refreshProposals();
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
+  const tColor = {
+    Starter: ACSA_T.ok, Standard: ACSA_T.navy, Enterprise: ACSA_T.oxblood, "Multi-wave": ACSA_T.warn
+  }[result.tier] || ACSA_T.ink;
+
+  return (
+    <div className="anim-up max-w-7xl mx-auto px-6 py-12">
+      <div className="mb-8">
+        <button onClick={() => setView("detail")} className="f-mono text-xs tracked-md uppercase inline-flex items-center gap-1 hover:gap-2 transition-all mb-4" style={{color: ACSA_T.muted}}>
+          <ChevronLeft size={12}/> {t("acsaCalcBack")}
+        </button>
+        <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaCalcKicker")}</div>
+        <h1 className="f-display text-4xl md:text-5xl font-bold leading-tight" style={{color: ACSA_T.ink}}>
+          {t("acsaCalcTitle1")} <span style={{fontStyle: "italic"}}>{t("acsaCalcTitle2")}</span>
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-12 gap-8">
+        <div className="col-span-12 md:col-span-7 border-2 p-6 md:p-8" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+          <div className="f-mono text-[10px] tracked uppercase mb-5" style={{color: ACSA_T.muted}}>{t("acsaCalcInputs")}</div>
+
+          <AcsaNumberInput label={t("acsaCalcAgents")} value={inputs.agents} min={1} max={20} onChange={v => update("agents", v)} hint={t("acsaCalcAgentsHint")}/>
+          <AcsaNumberInput label={t("acsaCalcTools")} value={inputs.tools} min={0} max={60} onChange={v => update("tools", v)} hint={t("acsaCalcToolsHint")}/>
+          <AcsaNumberInput label={t("acsaCalcMcp")} value={inputs.mcpServers} min={0} max={20} onChange={v => update("mcpServers", v)} hint={t("acsaCalcMcpHint")}/>
+          <AcsaNumberInput label={t("acsaCalcLoc")} value={inputs.loc} min={5_000} max={1_000_000} step={5_000} onChange={v => update("loc", v)} fmt={v => v.toLocaleString()} hint={t("acsaCalcLocHint")}/>
+          <AcsaNumberInput label={t("acsaCalcLangs")} value={inputs.langs} min={1} max={8} onChange={v => update("langs", v)} hint={t("acsaCalcLangsHint")}/>
+
+          <div className="mt-6 pt-6 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+            <div className="f-mono text-[10px] tracked uppercase mb-4" style={{color: ACSA_T.muted}}>{t("acsaCalcModifiers")}</div>
+            <AcsaToggle label={t("acsaCalcModEU")} hint="+10%" value={inputs.regHigh} onChange={v => update("regHigh", v)}/>
+            <AcsaToggle label={t("acsaCalcModMulti")} hint="+5%" value={inputs.regMulti} onChange={v => update("regMulti", v)}/>
+            <AcsaToggle label={t("acsaCalcModThreat")} hint={inputs.hasThreatModel ? t("acsaCalcModThreatOn") : t("acsaCalcModThreatOff")} value={inputs.hasThreatModel} onChange={v => update("hasThreatModel", v)}/>
+          </div>
+
+          <div className="mt-6 pt-6 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+            <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaCalcClient")}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <AcsaField label={t("acsaCalcOrg")} value={inputs.clientName} onChange={v => update("clientName", v)}/>
+              <AcsaField label={t("acsaCalcContact")} value={inputs.clientContact} onChange={v => update("clientContact", v)}/>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-12 md:col-span-5 space-y-4">
+          <div className="border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCalcRecTier")}</div>
+                <div className="f-display text-4xl font-bold mt-1" style={{color: tColor}}>{tierLabel}</div>
+              </div>
+              <div className="text-right">
+                <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCalcSurface")}</div>
+                <div className="f-display text-lg font-semibold mt-1" style={{color: ACSA_T.ink}}>{profileLabel}</div>
+              </div>
+            </div>
+            <div className="h-2 w-full mt-3 mb-1" style={{background: "rgba(27,36,51,.1)"}}>
+              <div className="h-full transition-all duration-500" style={{width: `${result.surfaceScore}%`, background: tColor}}/>
+            </div>
+            <div className="flex justify-between f-mono text-[10px] tracked" style={{color: ACSA_T.muted}}>
+              <span>{t("acsaCalcConstrained")}</span><span>{t("acsaCalcExtensive")}</span>
+            </div>
+          </div>
+
+          <div className="border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+            <div className="f-mono text-[10px] tracked uppercase mb-2" style={{color: ACSA_T.muted}}>{t("acsaCalcPriceBand")}</div>
+            <div className="f-display text-3xl md:text-4xl font-bold leading-none" style={{color: ACSA_T.ink}}>
+              ${result.adjLow.toLocaleString()}
+              <span className="f-display text-2xl mx-2" style={{color: ACSA_T.muted}}>–</span>
+              ${result.adjHigh.toLocaleString()}
+            </div>
+            <div className="grid grid-cols-2 gap-3 mt-5 pt-5 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+              <div>
+                <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCalcWorkingDays")}</div>
+                <div className="f-display text-lg font-semibold mt-1" style={{color: ACSA_T.ink}}>{result.days}</div>
+              </div>
+              <div>
+                <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCalcAdjustment")}</div>
+                <div className="f-display text-lg font-semibold mt-1" style={{color: result.mult > 1 ? ACSA_T.warn : result.mult < 1 ? ACSA_T.ok : ACSA_T.ink}}>
+                  {result.mult >= 1 ? "+" : ""}{((result.mult-1)*100).toFixed(1)}%
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-1">
+              {Object.entries(result.multiplierBreakdown).filter(([_,v]) => v !== 0).map(([k,v]) => (
+                <div key={k} className="flex justify-between f-mono text-[10px]" style={{color: ACSA_T.muted}}>
+                  <span className="tracked uppercase">{k}</span>
+                  <span style={{color: v > 0 ? ACSA_T.warn : ACSA_T.ok}}>{v > 0 ? "+" : ""}{(v*100).toFixed(0)}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+            <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaCalcPhasePlan")} ({result.days} {t("acsaPhaseDays")})</div>
+            {Object.entries(result.phaseDays).map(([n, d]) => {
+              const phase = phases.find(p => p.n === n);
+              const pct = (d / result.days) * 100;
+              return (
+                <div key={n} className="mb-2 last:mb-0">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="f-mono" style={{color: ACSA_T.muted}}>{n} · {phase.name}</span>
+                    <span className="f-mono font-semibold" style={{color: ACSA_T.ink}}>{d}d</span>
+                  </div>
+                  <div className="h-1.5" style={{background: "rgba(27,36,51,.08)"}}>
+                    <div className="h-full" style={{width: `${pct}%`, background: ACSA_T.oxblood}}/>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="flex gap-3">
+            <button onClick={saveProposal}
+              className="flex-1 f-mono text-xs tracked-md uppercase px-4 py-3 inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+              style={{background: ACSA_T.oxblood, color: ACSA_T.paper}}>
+              {saved ? <><Check size={14}/> {t("acsaCalcSavedBtn")}</> : <><FileText size={14}/> {t("acsaCalcSaveProposal")}</>}
+            </button>
+            <button onClick={() => setView("proposals")}
+              className="f-mono text-xs tracked-md uppercase px-4 py-3 inline-flex items-center gap-2 border hover:bg-black/5 transition-colors"
+              style={{borderColor: ACSA_T.ink, color: ACSA_T.ink}}>
+              {t("acsaCalcViewAll")}
+            </button>
+          </div>
+
+          <div className="f-mono text-[10px] tracked uppercase text-center" style={{color: ACSA_T.muted}}>
+            {t("acsaCalcAutosaved")}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AcsaNumberInput({ label, value, min, max, step = 1, onChange, hint, fmt }) {
+  const display = fmt ? fmt(value) : value;
+  return (
+    <div className="mb-5">
+      <div className="flex justify-between items-baseline mb-2">
+        <label className="f-body text-sm font-medium" style={{color: ACSA_T.ink}}>{label}</label>
+        <div className="f-mono text-base font-semibold" style={{color: ACSA_T.ink}}>{display}</div>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))}
+        className="w-full" style={{accentColor: ACSA_T.oxblood}}/>
+      {hint && <div className="f-mono text-[10px] mt-1" style={{color: ACSA_T.muted}}>{hint}</div>}
+    </div>
+  );
+}
+
+function AcsaToggle({ label, hint, value, onChange }) {
+  return (
+    <button onClick={() => onChange(!value)} className="w-full flex items-center justify-between py-2.5 text-left">
+      <div>
+        <div className="f-body text-sm font-medium" style={{color: ACSA_T.ink}}>{label}</div>
+        <div className="f-mono text-[10px] mt-0.5" style={{color: ACSA_T.muted}}>{hint}</div>
+      </div>
+      <div className="relative w-10 h-5 transition-colors" style={{background: value ? ACSA_T.oxblood : "rgba(27,36,51,.2)"}}>
+        <div className="absolute top-0.5 w-4 h-4 transition-all" style={{
+          left: value ? "calc(100% - 18px)" : "2px", background: ACSA_T.paper,
+        }}/>
+      </div>
+    </button>
+  );
+}
+
+function AcsaProposalsView({ setView, proposals, refreshProposals }) {
+  const { t } = useT();
+  const [selected, setSelected] = useState(null);
+
+  const tierLabel = (tier) => ({
+    "Starter": t("acsaTierStarter"),
+    "Standard": t("acsaTierStandard"),
+    "Enterprise": t("acsaTierEnterprise"),
+    "Multi-wave": t("acsaTierMultiwave"),
+  }[tier] || tier);
+
+  const profileLabel = (p) => ({
+    "Constrained": t("acsaProfileConstrained"),
+    "Moderate": t("acsaProfileModerate"),
+    "Substantial": t("acsaProfileSubstantial"),
+    "Extensive": t("acsaProfileExtensive"),
+  }[p] || p);
+
+  const remove = async (id) => {
+    const list = await acsaLoadStored(ACSA_PROPOSALS_KEY, []);
+    await acsaSaveStored(ACSA_PROPOSALS_KEY, list.filter(p => p.id !== id));
+    refreshProposals();
+    if (selected?.id === id) setSelected(null);
+  };
+
+  const exportSOW = (p) => {
+    const sow = acsaGenerateSOWMarkdown(p);
+    const blob = new Blob([sow], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `SOW_${p.id}.md`; a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="anim-up max-w-7xl mx-auto px-6 py-12">
+      <div className="mb-8">
+        <button onClick={() => setView("detail")} className="f-mono text-xs tracked-md uppercase inline-flex items-center gap-1 hover:gap-2 transition-all mb-4" style={{color: ACSA_T.muted}}>
+          <ChevronLeft size={12}/> {t("acsaPropBack")}
+        </button>
+        <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaPropKicker")}</div>
+        <h1 className="f-display text-4xl md:text-5xl font-bold leading-tight" style={{color: ACSA_T.ink}}>
+          {t("acsaPropTitle1")} <span style={{fontStyle: "italic"}}>{t("acsaPropTitle2")}</span>
+        </h1>
+      </div>
+
+      {proposals.length === 0 ? (
+        <div className="border-2 border-dashed p-16 text-center" style={{borderColor: "rgba(27,36,51,.25)"}}>
+          <FileText size={32} strokeWidth={1.4} className="mx-auto mb-4" style={{color: ACSA_T.muted}}/>
+          <div className="f-display text-xl font-semibold mb-2" style={{color: ACSA_T.ink}}>{t("acsaPropEmptyTitle")}</div>
+          <p className="f-body text-sm mb-6" style={{color: ACSA_T.muted}}>{t("acsaPropEmptyBody")}</p>
+          <button onClick={() => setView("calc")} className="f-mono text-xs tracked-md uppercase px-5 py-3 inline-flex items-center gap-2"
+            style={{background: ACSA_T.ink, color: ACSA_T.paper}}>
+            <Calculator size={14}/> {t("acsaPropOpenCalc")}
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 md:col-span-5 space-y-px" style={{background: "rgba(27,36,51,.12)"}}>
+            {proposals.map(p => (
+              <button key={p.id} onClick={() => setSelected(p)}
+                className="w-full text-left p-4 transition-colors"
+                style={{
+                  background: selected?.id === p.id ? ACSA_T.paperAlt : ACSA_T.paper,
+                  borderLeft: selected?.id === p.id ? `3px solid ${ACSA_T.oxblood}` : "3px solid transparent",
+                }}>
+                <div className="flex justify-between items-start mb-2">
+                  <div className="f-mono text-xs font-semibold" style={{color: ACSA_T.ink}}>{p.id}</div>
+                  <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{tierLabel(p.result.tier)}</div>
+                </div>
+                <div className="f-display font-semibold" style={{color: ACSA_T.ink}}>
+                  {p.inputs.clientName || t("acsaPropUntitled")}
+                </div>
+                <div className="flex justify-between items-baseline mt-2">
+                  <div className="f-mono text-xs" style={{color: ACSA_T.muted}}>{new Date(p.created).toLocaleDateString()}</div>
+                  <div className="f-mono text-sm font-semibold" style={{color: ACSA_T.oxblood}}>
+                    ${p.result.adjLow.toLocaleString()}–{p.result.adjHigh.toLocaleString()}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="col-span-12 md:col-span-7">
+            {selected ? (
+              <div className="border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <div className="f-mono text-xs" style={{color: ACSA_T.muted}}>{selected.id}</div>
+                    <div className="f-display text-2xl font-bold mt-1" style={{color: ACSA_T.ink}}>
+                      {selected.inputs.clientName || t("acsaPropUntitled")}
+                    </div>
+                    {selected.inputs.clientContact && (
+                      <div className="f-body text-sm mt-1" style={{color: ACSA_T.muted}}>{selected.inputs.clientContact}</div>
+                    )}
+                  </div>
+                  <button onClick={() => remove(selected.id)} className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaPropDelete")}</button>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 mt-5 pt-5 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+                  <AcsaStat label={t("acsaPropTier")} value={tierLabel(selected.result.tier)}/>
+                  <AcsaStat label={t("acsaPropDays")} value={selected.result.days}/>
+                  <AcsaStat label={t("acsaPropProfile")} value={profileLabel(selected.result.profile)}/>
+                </div>
+
+                <div className="mt-5 pt-5 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+                  <div className="f-mono text-[10px] tracked uppercase mb-2" style={{color: ACSA_T.muted}}>{t("acsaPropPriceBand")}</div>
+                  <div className="f-display text-3xl font-bold" style={{color: ACSA_T.ink}}>
+                    ${selected.result.adjLow.toLocaleString()} – ${selected.result.adjHigh.toLocaleString()}
+                  </div>
+                </div>
+
+                <div className="mt-5 pt-5 border-t" style={{borderColor: "rgba(27,36,51,.12)"}}>
+                  <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaPropInputs")}</div>
+                  <div className="grid grid-cols-2 gap-y-2 gap-x-6 text-sm">
+                    <AcsaKV k={t("acsaKVAgents")} v={selected.inputs.agents}/>
+                    <AcsaKV k={t("acsaKVTools")} v={selected.inputs.tools}/>
+                    <AcsaKV k={t("acsaKVMcp")} v={selected.inputs.mcpServers}/>
+                    <AcsaKV k={t("acsaKVLoc")} v={selected.inputs.loc.toLocaleString()}/>
+                    <AcsaKV k={t("acsaKVLangs")} v={selected.inputs.langs}/>
+                    <AcsaKV k={t("acsaKVRegHigh")} v={selected.inputs.regHigh ? t("acsaYes") : t("acsaNo")}/>
+                    <AcsaKV k={t("acsaKVRegMulti")} v={selected.inputs.regMulti ? t("acsaYes") : t("acsaNo")}/>
+                    <AcsaKV k={t("acsaKVThreatModel")} v={selected.inputs.hasThreatModel ? t("acsaYes") : t("acsaNo")}/>
+                  </div>
+                </div>
+
+                <button onClick={() => exportSOW(selected)} className="w-full f-mono text-xs tracked-md uppercase px-4 py-3 mt-6 inline-flex items-center justify-center gap-2"
+                  style={{background: ACSA_T.ink, color: ACSA_T.paper}}>
+                  <Download size={14}/> {t("acsaPropExportSOW")}
+                </button>
+              </div>
+            ) : (
+              <div className="border-2 border-dashed p-12 text-center" style={{borderColor: "rgba(27,36,51,.25)"}}>
+                <Eye size={28} strokeWidth={1.4} className="mx-auto mb-3" style={{color: ACSA_T.muted}}/>
+                <div className="f-body text-sm" style={{color: ACSA_T.muted}}>{t("acsaPropSelectPreview")}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AcsaStat({ label, value }) {
+  return (
+    <div>
+      <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{label}</div>
+      <div className="f-display text-lg font-semibold mt-0.5" style={{color: ACSA_T.ink}}>{value}</div>
+    </div>
+  );
+}
+function AcsaKV({ k, v }) {
+  return (
+    <div className="flex justify-between border-b pb-1" style={{borderColor: "rgba(27,36,51,.08)"}}>
+      <span className="f-body" style={{color: ACSA_T.muted}}>{k}</span>
+      <span className="f-body font-medium" style={{color: ACSA_T.ink}}>{v}</span>
+    </div>
+  );
+}
+
+function acsaGenerateSOWMarkdown(p) {
+  const today = new Date().toLocaleDateString("en-GB", { year:"numeric", month:"long", day:"numeric"});
+  const i = p.inputs, r = p.result;
+  return `# Statement of Work — Agent Codebase Security Audit (ACSA)
+
+**Engagement ID:** ${p.id}
+**Date drafted:** ${today}
+**Tier:** ${r.tier}
+**Indicative price band (USD):** $${r.adjLow.toLocaleString()} – $${r.adjHigh.toLocaleString()}
+**Working days:** ${r.days}
+
+---
+
+## 1. Parties
+
+**Provider:** Praxis·Agentic Cybersecurity Practice
+**Client:** ${i.clientName || "[CLIENT NAME]"}
+**Primary contact:** ${i.clientContact || "[PRIMARY CONTACT]"}
+
+## 2. Scope baseline
+
+| Input | Value |
+|-------|-------|
+| Agents in scope | ${i.agents} |
+| Tool implementations | ${i.tools} |
+| MCP servers (custom) | ${i.mcpServers} |
+| Approximate lines of code | ${i.loc.toLocaleString()} |
+| Implementation languages | ${i.langs} |
+| EU AI Act high-risk classification | ${i.regHigh ? "Yes" : "No"} |
+| Multi-jurisdiction deployment | ${i.regMulti ? "Yes" : "No"} |
+| Documented threat model present | ${i.hasThreatModel ? "Yes" : "No"} |
+
+## 3. Methodology
+
+Delivered under ACSA Methodology v1.0:
+
+${Object.entries(r.phaseDays).map(([n,d]) => {
+  const ph = ACSA_PHASES.find(x => x.n === n);
+  return `- **Phase ${n} — ${ph.name}**: ${d} day${d===1?"":"s"}`;
+}).join("\n")}
+
+## 4. Deliverables
+
+1. Audit report (DOCX + PDF)
+2. Findings register (CSV)
+3. Remediation playbook (Markdown)
+4. Executive readout deck (PPTX)
+5. Engineering walkthrough recording
+
+---
+
+**Provider signature:** ____________________  **Date:** _______
+**Client signature:**   ____________________  **Date:** _______
+`;
+}
+
+
+// =============================================================================
+// TRACKER · HOME (engagement list)
+// =============================================================================
+function AcsaTrackerHomeView({ engagements, onOpenEngagement, refresh, setView }) {
+  const { t } = useT();
+  const [showNew, setShowNew] = useState(false);
+
+  return (
+    <div className="anim-up max-w-7xl mx-auto px-6 py-12">
+      <div className="grid grid-cols-12 gap-8 mb-10">
+        <div className="col-span-12 md:col-span-8">
+          <div className="f-mono text-xs tracked uppercase mb-3" style={{color: ACSA_T.oxblood}}>
+            {t("acsaTrackerKicker")}
+          </div>
+          <h1 className="f-display font-bold leading-[0.95] mb-4" style={{color: ACSA_T.ink, fontSize: "clamp(2.25rem, 5vw, 4rem)"}}>
+            {t("acsaTrackerTitle1")}<br/>
+            <span style={{fontStyle: "italic", color: ACSA_T.oxblood}}>{t("acsaTrackerTitle2")}</span>
+          </h1>
+          <p className="f-body text-base leading-relaxed max-w-2xl" style={{color: ACSA_T.inkSoft}}>
+            {t("acsaTrackerIntro")}
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-4 flex md:justify-end items-end gap-2">
+          <AcsaBtn variant="secondary" size="lg" icon={Calculator} onClick={() => setView("calc")}>{t("acsaTrackerBtnFromCalc")}</AcsaBtn>
+          <AcsaBtn variant="dark" size="lg" icon={Plus} onClick={() => setShowNew(true)}>{t("acsaTrackerBtnNew")}</AcsaBtn>
+        </div>
+      </div>
+
+      {showNew && <AcsaNewEngagementModal onClose={() => setShowNew(false)} onCreate={async (eng) => {
+        const list = await acsaLoadStored(ACSA_ENG_LIST_KEY, []);
+        await acsaSaveStored(ACSA_ENG_LIST_KEY, [eng.id, ...list]);
+        await acsaSaveStored(acsa_eng_key(eng.id), eng);
+        setShowNew(false);
+        await refresh();
+        onOpenEngagement(eng.id);
+      }}/>}
+
+      {engagements.length === 0 ? (
+        <div className="border-2 border-dashed p-16 text-center" style={{borderColor: "rgba(27,36,51,.25)"}}>
+          <Briefcase size={32} strokeWidth={1.4} className="mx-auto mb-4" style={{color: ACSA_T.muted}}/>
+          <div className="f-display text-xl font-semibold mb-2" style={{color: ACSA_T.ink}}>{t("acsaTrackerEmptyTitle")}</div>
+          <p className="f-body text-sm mb-6" style={{color: ACSA_T.muted}}>{t("acsaTrackerEmptyBody")}</p>
+          <AcsaBtn variant="primary" icon={Plus} onClick={() => setShowNew(true)}>{t("acsaTrackerCreateFirst")}</AcsaBtn>
+        </div>
+      ) : (
+        <div className="border-t-2 pt-6" style={{borderColor: ACSA_T.ink}}>
+          <div className="flex items-baseline justify-between mb-5">
+            <h2 className="f-display text-xl font-semibold" style={{color: ACSA_T.ink}}>{t("acsaTrackerActiveTitle")}</h2>
+            <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{engagements.length} {t("acsaTrackerOnBooks")}</div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{background: "rgba(27,36,51,.12)"}}>
+            {engagements.map(e => (
+              <AcsaEngagementCard key={e.id} eng={e} onOpen={() => onOpenEngagement(e.id)}/>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AcsaEngagementCard({ eng, onOpen }) {
+  const { t } = useT();
+  const phases = useMemo(() => acsaGetPhases(t), [t]);
+  const totalActivities = Object.keys(eng.activityState).length;
+  const completed = Object.values(eng.activityState).filter(Boolean).length;
+  const pct = totalActivities ? Math.round((completed / totalActivities) * 100) : 0;
+  const totalGates = Object.keys(eng.gateState).length;
+  const signedGates = Object.values(eng.gateState).filter(g => g.signed).length;
+  const findings = eng.findings.length;
+  const p0p1 = eng.findings.filter(f => f.tier === "P0" || f.tier === "P1").length;
+
+  const tierLabel = ({
+    "Starter": t("acsaTierStarter"),
+    "Standard": t("acsaTierStandard"),
+    "Enterprise": t("acsaTierEnterprise"),
+    "Multi-wave": t("acsaTierMultiwave"),
+  }[eng.tier]) || eng.tier;
+
+  return (
+    <button onClick={onOpen} className="text-left p-6 transition-all hover:shadow-paper" style={{background: ACSA_T.paper}}>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <div className="f-mono text-xs font-semibold mb-1" style={{color: ACSA_T.oxblood}}>{eng.id}</div>
+          <div className="f-display text-xl font-bold leading-tight" style={{color: ACSA_T.ink}}>{eng.client || t("acsaCardUntitled")}</div>
+          <div className="f-body text-sm mt-1" style={{color: ACSA_T.muted}}>
+            {tierLabel} · {t("acsaCardStarted")} {new Date(eng.startDate || eng.created).toLocaleDateString()}
+          </div>
+        </div>
+        <AcsaChip color={acsaTierColor(eng.tier === "Starter" ? "P3" : eng.tier === "Standard" ? "P2" : "P1")}>{tierLabel}</AcsaChip>
+      </div>
+
+      <div className="grid grid-cols-7 gap-px mt-5 mb-3" style={{background: "rgba(27,36,51,.18)"}}>
+        {phases.map((p) => {
+          const phaseDone = p.activities.every(a => eng.activityState[a.id]);
+          const phaseInProgress = p.activities.some(a => eng.activityState[a.id]) && !phaseDone;
+          return (
+            <div key={p.n} className="text-center py-2" style={{
+              background: phaseDone ? ACSA_T.ink : phaseInProgress ? ACSA_T.amber : ACSA_T.paperAlt
+            }}>
+              <div className="f-mono text-[10px]" style={{color: phaseDone ? ACSA_T.amber : phaseInProgress ? ACSA_T.paper : ACSA_T.muted}}>
+                {p.n}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-3 gap-3 pt-4 border-t" style={{borderColor: "rgba(27,36,51,.1)"}}>
+        <div>
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCardProgress")}</div>
+          <div className="f-display text-lg font-semibold" style={{color: ACSA_T.ink}}>{pct}%</div>
+        </div>
+        <div>
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCardGates")}</div>
+          <div className="f-display text-lg font-semibold" style={{color: ACSA_T.ink}}>{signedGates}/{totalGates}</div>
+        </div>
+        <div>
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaCardP0P1")}</div>
+          <div className="f-display text-lg font-semibold" style={{color: p0p1 > 0 ? ACSA_T.oxblood : ACSA_T.ink}}>
+            {p0p1}{findings > 0 ? `/${findings}` : ""}
+          </div>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function AcsaNewEngagementModal({ onClose, onCreate }) {
+  const { t } = useT();
+  const [form, setForm] = useState({
+    id: `ACSA-${String(Date.now()).slice(-4)}`,
+    client: "", tier: "Standard",
+    leadName: "", engineerName: "", qaName: "",
+    startDate: new Date().toISOString().slice(0, 10),
+  });
+
+  const tierOptions = ["Starter","Standard","Enterprise"];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{background: "rgba(20,24,31,.6)"}}>
+      <div className="w-full max-w-2xl p-8 border-2 anim-up" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.oxblood}}>{t("acsaModalKicker")}</div>
+            <div className="f-display text-2xl font-bold" style={{color: ACSA_T.ink}}>{t("acsaModalTitle")}</div>
+          </div>
+          <button onClick={onClose} className="p-1.5"><X size={20} style={{color: ACSA_T.muted}}/></button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <AcsaField label={t("acsaModalEngId")} value={form.id} onChange={v => setForm({...form, id: v})}/>
+          <AcsaSelectField label={t("acsaModalTier")} value={form.tier} options={tierOptions} onChange={v => setForm({...form, tier: v})}/>
+          <AcsaField label={t("acsaModalClient")} value={form.client} onChange={v => setForm({...form, client: v})} className="col-span-2"/>
+          <AcsaField label={t("acsaModalLead")} value={form.leadName} onChange={v => setForm({...form, leadName: v})}/>
+          <AcsaField label={t("acsaModalEngineer")} value={form.engineerName} onChange={v => setForm({...form, engineerName: v})}/>
+          <AcsaField label={t("acsaModalQA")} value={form.qaName} onChange={v => setForm({...form, qaName: v})}/>
+          <AcsaField label={t("acsaModalStartDate")} type="date" value={form.startDate} onChange={v => setForm({...form, startDate: v})}/>
+        </div>
+
+        <div className="flex justify-end gap-3 mt-6 pt-6 border-t" style={{borderColor: "rgba(27,36,51,.1)"}}>
+          <AcsaBtn variant="ghost" onClick={onClose}>{t("acsaModalCancel")}</AcsaBtn>
+          <AcsaBtn variant="primary" icon={Check} onClick={() => onCreate(acsaNewEngagement(form))} disabled={!form.client || !form.leadName}>
+            {t("acsaModalCreate")}
+          </AcsaBtn>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AcsaEngagementView({ engagement, updateEngagement, onBack, deleteEngagement }) {
+  const { t } = useT();
+  const [tab, setTab] = useState("phases");
+
+  const tierLabel = ({
+    "Starter": t("acsaTierStarter"),
+    "Standard": t("acsaTierStandard"),
+    "Enterprise": t("acsaTierEnterprise"),
+    "Multi-wave": t("acsaTierMultiwave"),
+  }[engagement.tier]) || engagement.tier;
+
+  const summary = useMemo(() => {
+    const f = engagement.findings;
+    return {
+      total: f.length,
+      p0: f.filter(x => x.tier === "P0").length,
+      p1: f.filter(x => x.tier === "P1").length,
+      p2: f.filter(x => x.tier === "P2").length,
+      p3: f.filter(x => x.tier === "P3").length,
+      open: f.filter(x => x.status === "Open").length,
+    };
+  }, [engagement.findings]);
+
+  const tabs = [
+    { id: "phases",     label: t("acsaTabPhases"),     icon: Workflow },
+    { id: "components", label: t("acsaTabComponents"), icon: Boxes },
+    { id: "findings",   label: t("acsaTabFindings"),   icon: AlertTriangle },
+    { id: "report",     label: t("acsaTabReport"),     icon: FileBarChart },
+  ];
+
+  return (
+    <div className="anim-up">
+      <div className="border-b-2" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <button onClick={onBack} className="f-mono text-xs tracked-md uppercase inline-flex items-center gap-1 hover:gap-2 transition-all mb-4" style={{color: ACSA_T.muted}}>
+            <ChevronLeft size={12}/> {t("acsaEngBackAll")}
+          </button>
+
+          <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-8">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="f-mono text-xs font-semibold" style={{color: ACSA_T.oxblood}}>{engagement.id}</div>
+                <AcsaChip color={ACSA_T.muted}>{tierLabel}</AcsaChip>
+                <AcsaChip color={ACSA_T.ok} bg={ACSA_T.ok}>{t("acsaEngActive")}</AcsaChip>
+              </div>
+              <h1 className="f-display text-3xl md:text-4xl font-bold leading-tight" style={{color: ACSA_T.ink}}>
+                {engagement.client}
+              </h1>
+              <div className="flex flex-wrap gap-x-6 gap-y-1 mt-3 f-body text-sm" style={{color: ACSA_T.muted}}>
+                <span><Users size={12} className="inline mr-1"/> {engagement.leadName} ({t("acsaEngLead")})</span>
+                <span>{engagement.engineerName} ({t("acsaEngEng")})</span>
+                <span>{engagement.qaName} ({t("acsaEngQA")})</span>
+                <span><Calendar size={12} className="inline mr-1"/> {t("acsaEngStarted")} {new Date(engagement.startDate).toLocaleDateString()}</span>
+              </div>
+            </div>
+
+            <div className="col-span-12 md:col-span-4">
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { l: t("acsaStatTotal"), v: summary.total, c: ACSA_T.ink },
+                  { l: "P0",               v: summary.p0,    c: ACSA_T.oxblood },
+                  { l: "P1",               v: summary.p1,    c: ACSA_T.warn },
+                  { l: t("acsaStatOpen"),  v: summary.open,  c: ACSA_T.amber },
+                ].map(s => (
+                  <div key={s.l} className="border-2 p-2 text-center" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+                    <div className="f-mono text-[9px] tracked uppercase" style={{color: ACSA_T.muted}}>{s.l}</div>
+                    <div className="f-display text-2xl font-bold" style={{color: s.c}}>{s.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 flex gap-1 -mb-px overflow-x-auto">
+          {tabs.map(tt => {
+            const Icon = tt.icon;
+            const active = tab === tt.id;
+            return (
+              <button key={tt.id} onClick={() => setTab(tt.id)}
+                className="f-mono text-xs tracked-md uppercase px-4 py-3 inline-flex items-center gap-2 transition-colors whitespace-nowrap"
+                style={{
+                  color: active ? ACSA_T.ink : ACSA_T.muted,
+                  borderBottom: active ? `3px solid ${ACSA_T.oxblood}` : "3px solid transparent",
+                  fontWeight: active ? 700 : 500,
+                }}>
+                <Icon size={14}/> {tt.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {tab === "phases"     && <AcsaPhasesTab engagement={engagement} update={updateEngagement}/>}
+        {tab === "components" && <AcsaComponentsTab engagement={engagement} update={updateEngagement}/>}
+        {tab === "findings"   && <AcsaFindingsTab engagement={engagement} update={updateEngagement}/>}
+        {tab === "report"     && <AcsaReportTab engagement={engagement} update={updateEngagement} deleteEngagement={deleteEngagement} onBack={onBack}/>}
+      </div>
+    </div>
+  );
+}
+
+function AcsaPhasesTab({ engagement, update }) {
+  const { t } = useT();
+  const phases = useMemo(() => acsaGetPhases(t), [t]);
+  const [expanded, setExpanded] = useState(0);
+
+  const toggleActivity = (id) => {
+    update({ ...engagement, activityState: { ...engagement.activityState, [id]: !engagement.activityState[id] } });
+  };
+
+  return (
+    <div className="grid grid-cols-12 gap-6">
+      <div className="col-span-12 md:col-span-5">
+        <div className="f-mono text-xs tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaPhProgression")}</div>
+        <div className="space-y-px" style={{background: "rgba(27,36,51,.12)"}}>
+          {phases.map((p, i) => {
+            const total = p.activities.length;
+            const done = p.activities.filter(a => engagement.activityState[a.id]).length;
+            const pct = (done / total) * 100;
+            const allDone = done === total;
+            const gateSigned = p.gate != null ? engagement.gateState[`gate-${p.gate}`]?.signed : null;
+            const Icon = p.icon;
+            return (
+              <button key={p.n} onClick={() => setExpanded(i)}
+                className="w-full text-left p-4 transition-colors"
+                style={{
+                  background: expanded === i ? ACSA_T.paperAlt : ACSA_T.paper,
+                  borderLeft: expanded === i ? `3px solid ${ACSA_T.oxblood}` : "3px solid transparent",
+                }}>
+                <div className="flex items-center gap-3">
+                  <Icon size={18} strokeWidth={1.5} style={{color: allDone ? ACSA_T.ok : ACSA_T.muted}}/>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="f-mono text-[10px] font-semibold" style={{color: ACSA_T.oxblood}}>{p.n}</span>
+                      <span className="f-display font-semibold text-sm" style={{color: ACSA_T.ink}}>{p.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="flex-1 h-1" style={{background: "rgba(27,36,51,.1)"}}>
+                        <div className="h-full transition-all" style={{width: `${pct}%`, background: allDone ? ACSA_T.ok : ACSA_T.amber}}/>
+                      </div>
+                      <span className="f-mono text-[10px]" style={{color: ACSA_T.muted}}>{done}/{total}</span>
+                    </div>
+                  </div>
+                  {p.gate != null && (
+                    <div title={p.gateName}>
+                      {gateSigned ? <Lock size={14} style={{color: ACSA_T.ok}}/> : <Unlock size={14} style={{color: ACSA_T.muted}}/>}
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="col-span-12 md:col-span-7">
+        {(() => {
+          const p = phases[expanded];
+          const Icon = p.icon;
+          const gate = p.gate != null ? engagement.gateState[`gate-${p.gate}`] : null;
+          return (
+            <div className="anim-up" key={expanded}>
+              <div className="border-2 p-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+                <div className="flex items-start gap-4 mb-4">
+                  <Icon size={32} strokeWidth={1.4} style={{color: ACSA_T.oxblood}}/>
+                  <div>
+                    <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaPhaseLabel")} {p.n}</div>
+                    <h3 className="f-display text-2xl font-bold" style={{color: ACSA_T.ink}}>{p.name}</h3>
+                  </div>
+                </div>
+
+                <div className="f-mono text-[10px] tracked uppercase mt-6 mb-3" style={{color: ACSA_T.muted}}>{t("acsaPhActivitiesLabel")}</div>
+                <div className="space-y-2">
+                  {p.activities.map((a) => {
+                    const checked = engagement.activityState[a.id];
+                    return (
+                      <button key={a.id} onClick={() => toggleActivity(a.id)}
+                        className="w-full flex items-start gap-3 p-3 text-left transition-colors hover:bg-black/5">
+                        <div className="mt-0.5">
+                          {checked ? <CheckCircle2 size={18} style={{color: ACSA_T.ok}}/> : <Circle size={18} style={{color: ACSA_T.muted}}/>}
+                        </div>
+                        <div className="f-body text-sm" style={{color: checked ? ACSA_T.muted : ACSA_T.inkSoft, textDecoration: checked ? "line-through" : "none"}}>
+                          {a.t}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {gate && <AcsaGateBlock phase={p} gate={gate} engagement={engagement} update={update}/>}
+            </div>
+          );
+        })()}
+      </div>
+    </div>
+  );
+}
+
+function AcsaGateBlock({ phase, gate, engagement, update }) {
+  const { t } = useT();
+  const [signing, setSigning] = useState(false);
+  const [signer, setSigner] = useState(engagement.leadName);
+  const [note, setNote] = useState("");
+
+  const allActivitiesDone = phase.activities.every(a => engagement.activityState[a.id]);
+  const canSign = allActivitiesDone && !gate.signed;
+
+  const sign = () => {
+    update({
+      ...engagement,
+      gateState: {
+        ...engagement.gateState,
+        [`gate-${phase.gate}`]: { signed: true, signer, date: new Date().toISOString(), note }
+      }
+    });
+    setSigning(false);
+  };
+
+  const unsign = () => {
+    update({
+      ...engagement,
+      gateState: {
+        ...engagement.gateState,
+        [`gate-${phase.gate}`]: { signed: false, signer: null, date: null, note: null }
+      }
+    });
+  };
+
+  return (
+    <div className="mt-4 border-2 p-6" style={{
+      borderColor: gate.signed ? ACSA_T.ok : ACSA_T.oxblood,
+      background: gate.signed ? "rgba(59,110,58,.05)" : "rgba(122,31,43,.05)",
+    }}>
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start gap-3">
+          {gate.signed ? <ShieldCheck size={24} style={{color: ACSA_T.ok}}/> : <FlagTriangleRight size={24} style={{color: ACSA_T.oxblood}}/>}
+          <div>
+            <div className="f-mono text-[10px] tracked uppercase" style={{color: gate.signed ? ACSA_T.ok : ACSA_T.oxblood}}>
+              {gate.signed ? t("acsaGateSigned") : t("acsaGatePending")}
+            </div>
+            <div className="f-display text-lg font-bold" style={{color: ACSA_T.ink}}>{phase.gateName}</div>
+          </div>
+        </div>
+      </div>
+
+      <p className="f-body text-sm mb-4" style={{color: ACSA_T.inkSoft}}>{phase.gateRequires}</p>
+
+      {gate.signed ? (
+        <div className="border-t pt-4" style={{borderColor: "rgba(27,36,51,.1)"}}>
+          <div className="grid grid-cols-2 gap-4 mb-3">
+            <div>
+              <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaGateSignedBy")}</div>
+              <div className="f-display font-semibold" style={{color: ACSA_T.ink}}>{gate.signer}</div>
+            </div>
+            <div>
+              <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaGateDate")}</div>
+              <div className="f-display font-semibold" style={{color: ACSA_T.ink}}>{new Date(gate.date).toLocaleString()}</div>
+            </div>
+          </div>
+          {gate.note && (
+            <div>
+              <div className="f-mono text-[10px] tracked uppercase mb-1" style={{color: ACSA_T.muted}}>{t("acsaGateNote")}</div>
+              <div className="f-body text-sm italic" style={{color: ACSA_T.inkSoft}}>"{gate.note}"</div>
+            </div>
+          )}
+          <div className="mt-4">
+            <AcsaBtn variant="ghost" size="sm" icon={Unlock} onClick={unsign}>{t("acsaGateRevoke")}</AcsaBtn>
+          </div>
+        </div>
+      ) : signing ? (
+        <div className="space-y-3 border-t pt-4" style={{borderColor: "rgba(27,36,51,.1)"}}>
+          <AcsaField label={t("acsaGateSigner")} value={signer} onChange={setSigner}/>
+          <AcsaTextareaField label={t("acsaGateNoteLabel")} value={note} onChange={setNote} rows={2}
+            placeholder={t("acsaGateNotePlaceholder")}/>
+          <div className="flex gap-2 justify-end">
+            <AcsaBtn variant="ghost" size="sm" onClick={() => setSigning(false)}>{t("acsaModalCancel")}</AcsaBtn>
+            <AcsaBtn variant="ok" size="sm" icon={PenLine} onClick={sign} disabled={!signer.trim()}>{t("acsaGateSignBtn")}</AcsaBtn>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-3">
+          {!allActivitiesDone && (
+            <div className="f-mono text-[10px] tracked uppercase flex items-center gap-1" style={{color: ACSA_T.warn}}>
+              <AlertCircle size={12}/> {t("acsaGateNeedActivities")}
+            </div>
+          )}
+          <div className="ml-auto">
+            <AcsaBtn variant="primary" size="sm" icon={PenLine} onClick={() => setSigning(true)} disabled={!canSign}>
+              {t("acsaGateSignBtn")}
+            </AcsaBtn>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+function AcsaComponentsTab({ engagement, update }) {
+  const { t } = useT();
+  const [editingId, setEditingId] = useState(null);
+  const [draft, setDraft] = useState(null);
+
+  const startEdit = (comp) => {
+    setEditingId(comp ? comp.component_id : "new");
+    setDraft(comp || {
+      component_id: `AC-${String((engagement.components.length + 1)).padStart(3, "0")}`,
+      component_type: "tool", repository: "", path: "", language: "",
+      upstream_trust: "llm", downstream_blast: "medium",
+      priority_target: false, notes: "",
+    });
+  };
+
+  const save = () => {
+    const exists = engagement.components.find(c => c.component_id === draft.component_id);
+    const components = exists
+      ? engagement.components.map(c => c.component_id === draft.component_id ? draft : c)
+      : [...engagement.components, draft];
+    update({ ...engagement, components });
+    setEditingId(null); setDraft(null);
+  };
+
+  const remove = (id) => {
+    update({ ...engagement, components: engagement.components.filter(c => c.component_id !== id) });
+  };
+
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-5">
+        <div>
+          <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.oxblood}}>{t("acsaCompKicker")}</div>
+          <h2 className="f-display text-2xl font-bold" style={{color: ACSA_T.ink}}>{t("acsaCompTitle")}</h2>
+        </div>
+        <AcsaBtn variant="dark" size="sm" icon={Plus} onClick={() => startEdit(null)}>{t("acsaCompAdd")}</AcsaBtn>
+      </div>
+
+      {editingId && (
+        <div className="border-2 p-6 mb-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+          <div className="f-display text-lg font-bold mb-4" style={{color: ACSA_T.ink}}>
+            {editingId === "new" ? t("acsaCompNew") : `${t("acsaCompEditing")} ${editingId}`}
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <AcsaField label={t("acsaCompId")} value={draft.component_id} onChange={v => setDraft({...draft, component_id: v})}/>
+            <AcsaSelectField label={t("acsaCompType")} value={draft.component_type} options={ACSA_COMPONENT_TYPES} onChange={v => setDraft({...draft, component_type: v})}/>
+            <AcsaField label={t("acsaCompRepo")} value={draft.repository} onChange={v => setDraft({...draft, repository: v})}/>
+            <AcsaField label={t("acsaCompLang")} value={draft.language} onChange={v => setDraft({...draft, language: v})}/>
+            <AcsaField label={t("acsaCompPath")} value={draft.path} onChange={v => setDraft({...draft, path: v})} className="col-span-2"/>
+            <AcsaSelectField label={t("acsaCompUpstream")} value={draft.upstream_trust} options={["user","llm","another_agent","system","mixed"]} onChange={v => setDraft({...draft, upstream_trust: v})}/>
+            <AcsaSelectField label={t("acsaCompDownstream")} value={draft.downstream_blast} options={["low","medium","high","critical"]} onChange={v => setDraft({...draft, downstream_blast: v})}/>
+            <label className="block col-span-2">
+              <div className="f-mono text-[10px] tracked uppercase mb-1.5" style={{color: ACSA_T.muted}}>{t("acsaCompPriority")}</div>
+              <button onClick={() => setDraft({...draft, priority_target: !draft.priority_target})}
+                className="w-full flex items-center justify-between py-2.5 px-3 input-base text-left">
+                <span className="f-body text-sm" style={{color: ACSA_T.ink}}>
+                  {draft.priority_target ? t("acsaCompPriorityYes") : t("acsaCompPriorityNo")}
+                </span>
+                <div className="relative w-10 h-5 transition-colors" style={{background: draft.priority_target ? ACSA_T.oxblood : "rgba(27,36,51,.2)"}}>
+                  <div className="absolute top-0.5 w-4 h-4 transition-all"
+                    style={{ left: draft.priority_target ? "calc(100% - 18px)" : "2px", background: ACSA_T.paper }}/>
+                </div>
+              </button>
+            </label>
+            <AcsaTextareaField label={t("acsaCompNotes")} value={draft.notes} onChange={v => setDraft({...draft, notes: v})} className="col-span-2" rows={2}/>
+          </div>
+          <div className="flex justify-end gap-2 mt-4">
+            <AcsaBtn variant="ghost" onClick={() => { setEditingId(null); setDraft(null); }}>{t("acsaCompCancel")}</AcsaBtn>
+            <AcsaBtn variant="primary" icon={Save} onClick={save} disabled={!draft.component_id || !draft.repository}>{t("acsaCompSave")}</AcsaBtn>
+          </div>
+        </div>
+      )}
+
+      {engagement.components.length === 0 ? (
+        <div className="border-2 border-dashed p-12 text-center" style={{borderColor: "rgba(27,36,51,.25)"}}>
+          <Boxes size={28} strokeWidth={1.4} className="mx-auto mb-3" style={{color: ACSA_T.muted}}/>
+          <div className="f-body text-sm" style={{color: ACSA_T.muted}}>{t("acsaCompEmpty")}</div>
+        </div>
+      ) : (
+        <div className="border-2 overflow-x-auto" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+          <table className="w-full text-sm">
+            <thead>
+              <tr style={{background: ACSA_T.navy}}>
+                {[t("acsaCompTblID"), t("acsaCompTblType"), t("acsaCompTblRepo"), t("acsaCompTblTrust"), t("acsaCompTblPriority"), ""].map(h => (
+                  <th key={h} className="f-mono text-[10px] tracked uppercase text-left px-3 py-3 font-semibold" style={{color: ACSA_T.paper}}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {engagement.components.map((c, i) => (
+                <tr key={c.component_id} style={{background: i % 2 === 0 ? ACSA_T.paper : ACSA_T.paperAlt}}>
+                  <td className="px-3 py-2.5 f-mono text-xs font-semibold" style={{color: ACSA_T.oxblood}}>{c.component_id}</td>
+                  <td className="px-3 py-2.5 f-body" style={{color: ACSA_T.ink}}>{c.component_type}</td>
+                  <td className="px-3 py-2.5 f-body" style={{color: ACSA_T.inkSoft}}>
+                    <div className="font-medium">{c.repository}</div>
+                    <div className="f-mono text-[10px]" style={{color: ACSA_T.muted}}>{c.path}</div>
+                  </td>
+                  <td className="px-3 py-2.5 f-body" style={{color: ACSA_T.inkSoft}}>
+                    <span className="f-mono text-xs">{c.upstream_trust}</span>
+                    <ChevronRight size={10} className="inline mx-1" style={{color: ACSA_T.muted}}/>
+                    <AcsaChip color={c.downstream_blast === "critical" ? ACSA_T.oxblood : c.downstream_blast === "high" ? ACSA_T.warn : ACSA_T.muted}>
+                      {c.downstream_blast}
+                    </AcsaChip>
+                  </td>
+                  <td className="px-3 py-2.5">
+                    {c.priority_target && <AcsaChip color={ACSA_T.oxblood} bg={ACSA_T.oxblood}>{t("acsaCompPriorityChip")}</AcsaChip>}
+                  </td>
+                  <td className="px-3 py-2.5 text-right whitespace-nowrap">
+                    <button onClick={() => startEdit(c)} className="p-1 mr-1" title="Edit">
+                      <Edit2 size={12} style={{color: ACSA_T.muted}}/>
+                    </button>
+                    <button onClick={() => remove(c.component_id)} className="p-1" title="Delete">
+                      <Trash2 size={12} style={{color: ACSA_T.oxblood}}/>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AcsaFindingsTab({ engagement, update }) {
+  const { t } = useT();
+  const [editingId, setEditingId] = useState(null);
+  const [draft, setDraft] = useState(null);
+  const [filterTier, setFilterTier] = useState("all");
+  const [search, setSearch] = useState("");
+
+  const startEdit = (finding) => {
+    setEditingId(finding ? finding.id : "new");
+    setDraft(finding || {
+      id: `${engagement.id}-${String(engagement.findings.length + 1).padStart(3, "0")}`,
+      title: "", component: "", repository: "", filePath: "", lineRange: "",
+      discoveryMethod: "Claude Security primary scan",
+      claudeSecurityExcerpt: "", taxonomy: "Tool abuse",
+      owasp: "", atlas: "", narrative: "",
+      likelihood: "Medium", impact: "Medium", amplification: 1.5,
+      remediation: "", preventiveControl: "",
+      regulatoryTag: "None", status: "Open",
+      reviewer: engagement.engineerName,
+      reviewDate: new Date().toISOString().slice(0, 10),
+    });
+  };
+
+  const computedDraft = useMemo(() => {
+    if (!draft) return null;
+    const score = acsaComputeScore(draft.likelihood, draft.impact, draft.amplification);
+    const tier = acsaScoreToTier(score);
+    return { ...draft, score, tier };
+  }, [draft]);
+
+  const save = () => {
+    const finding = { ...computedDraft };
+    const exists = engagement.findings.find(f => f.id === finding.id);
+    const findings = exists
+      ? engagement.findings.map(f => f.id === finding.id ? finding : f)
+      : [...engagement.findings, finding];
+    update({ ...engagement, findings });
+    setEditingId(null); setDraft(null);
+  };
+
+  const remove = (id) => {
+    update({ ...engagement, findings: engagement.findings.filter(f => f.id !== id) });
+  };
+
+  const filtered = engagement.findings.filter(f => {
+    if (filterTier !== "all" && f.tier !== filterTier) return false;
+    if (search) {
+      const s = search.toLowerCase();
+      return f.title.toLowerCase().includes(s) || f.id.toLowerCase().includes(s) || (f.component || "").toLowerCase().includes(s);
+    }
+    return true;
+  }).sort((a, b) => (b.score || 0) - (a.score || 0));
+
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-5">
+        <div>
+          <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.oxblood}}>{t("acsaFindKicker")}</div>
+          <h2 className="f-display text-2xl font-bold" style={{color: ACSA_T.ink}}>{t("acsaFindTitle")}</h2>
+        </div>
+        <AcsaBtn variant="dark" size="sm" icon={Plus} onClick={() => startEdit(null)}>{t("acsaFindAdd")}</AcsaBtn>
+      </div>
+
+      {editingId && computedDraft && (
+        <div className="border-2 p-6 mb-6" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <div className="f-mono text-xs tracked uppercase" style={{color: ACSA_T.oxblood}}>{editingId === "new" ? t("acsaFindNew") : t("acsaFindEditing")}</div>
+              <div className="f-display text-lg font-bold" style={{color: ACSA_T.ink}}>{computedDraft.id}</div>
+            </div>
+            {computedDraft.tier && (
+              <div className="text-right">
+                <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaFindComputed")}</div>
+                <div className="flex items-center gap-2">
+                  <AcsaChip color={acsaTierColor(computedDraft.tier)} bg={acsaTierColor(computedDraft.tier)} size="lg">{computedDraft.tier}</AcsaChip>
+                  <span className="f-display text-xl font-bold" style={{color: ACSA_T.ink}}>{computedDraft.score?.toFixed(1)}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <AcsaField label={t("acsaFindId")} value={computedDraft.id} onChange={v => setDraft({...draft, id: v})}/>
+            <AcsaField label={t("acsaFindFTitle")} value={computedDraft.title} onChange={v => setDraft({...draft, title: v})}/>
+            <AcsaField label={t("acsaFindComponent")} value={computedDraft.component} onChange={v => setDraft({...draft, component: v})}/>
+            <AcsaField label={t("acsaFindRepo")} value={computedDraft.repository} onChange={v => setDraft({...draft, repository: v})}/>
+            <AcsaField label={t("acsaFindFilePath")} value={computedDraft.filePath} onChange={v => setDraft({...draft, filePath: v})}/>
+            <AcsaField label={t("acsaFindLineRange")} value={computedDraft.lineRange} onChange={v => setDraft({...draft, lineRange: v})}/>
+
+            <AcsaSelectField label={t("acsaFindDiscovery")} value={computedDraft.discoveryMethod}
+              options={["Claude Security primary scan","Claude Security secondary scan","Semgrep","Manual review","Composite chain"]}
+              onChange={v => setDraft({...draft, discoveryMethod: v})}/>
+            <AcsaSelectField label={t("acsaFindTaxonomy")} value={computedDraft.taxonomy} options={ACSA_TAXONOMY} onChange={v => setDraft({...draft, taxonomy: v})}/>
+
+            <AcsaSelectField label={t("acsaFindOwasp")} value={computedDraft.owasp} options={ACSA_OWASP_LLM} onChange={v => setDraft({...draft, owasp: v})}/>
+            <AcsaSelectField label={t("acsaFindAtlas")} value={computedDraft.atlas} options={ACSA_ATLAS} onChange={v => setDraft({...draft, atlas: v})}/>
+
+            <AcsaTextareaField label={t("acsaFindExcerpt")}
+              value={computedDraft.claudeSecurityExcerpt} onChange={v => setDraft({...draft, claudeSecurityExcerpt: v})}
+              className="col-span-2" rows={3}
+              placeholder={t("acsaFindExcerptHint")}/>
+
+            <AcsaTextareaField label={t("acsaFindNarrative")}
+              value={computedDraft.narrative} onChange={v => setDraft({...draft, narrative: v})}
+              className="col-span-2" rows={4}
+              placeholder={t("acsaFindNarrativeHint")}/>
+
+            <AcsaSelectField label={t("acsaFindLikelihood")} value={computedDraft.likelihood} options={ACSA_LEVELS} onChange={v => setDraft({...draft, likelihood: v})}/>
+            <AcsaSelectField label={t("acsaFindImpact")} value={computedDraft.impact} options={ACSA_LEVELS} onChange={v => setDraft({...draft, impact: v})}/>
+
+            <label className="block col-span-2">
+              <div className="flex justify-between items-baseline mb-1.5">
+                <span className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{t("acsaFindAmplification")}</span>
+                <span className="f-mono text-sm font-bold" style={{color: ACSA_T.ink}}>{Number(computedDraft.amplification).toFixed(1)}×</span>
+              </div>
+              <input type="range" min={1.0} max={2.5} step={0.1}
+                value={computedDraft.amplification}
+                onChange={e => setDraft({...draft, amplification: Number(e.target.value)})}
+                className="w-full" style={{accentColor: ACSA_T.oxblood}}/>
+              <div className="flex justify-between f-mono text-[10px] mt-1" style={{color: ACSA_T.muted}}>
+                <span>{t("acsaFindAmpLow")}</span>
+                <span>{t("acsaFindAmpHigh")}</span>
+              </div>
+            </label>
+
+            <AcsaTextareaField label={t("acsaFindRemediation")}
+              value={computedDraft.remediation} onChange={v => setDraft({...draft, remediation: v})}
+              className="col-span-2" rows={3}/>
+
+            <AcsaTextareaField label={t("acsaFindPreventive")}
+              value={computedDraft.preventiveControl} onChange={v => setDraft({...draft, preventiveControl: v})}
+              className="col-span-2" rows={2}/>
+
+            <AcsaSelectField label={t("acsaFindRegulatory")} value={computedDraft.regulatoryTag} options={ACSA_REG_TAGS} onChange={v => setDraft({...draft, regulatoryTag: v})}/>
+            <AcsaSelectField label={t("acsaFindStatus")} value={computedDraft.status} options={ACSA_STATUS} onChange={v => setDraft({...draft, status: v})}/>
+
+            <AcsaField label={t("acsaFindReviewer")} value={computedDraft.reviewer} onChange={v => setDraft({...draft, reviewer: v})}/>
+            <AcsaField label={t("acsaFindReviewDate")} type="date" value={computedDraft.reviewDate} onChange={v => setDraft({...draft, reviewDate: v})}/>
+          </div>
+
+          <div className="flex justify-end gap-2 mt-4">
+            <AcsaBtn variant="ghost" onClick={() => { setEditingId(null); setDraft(null); }}>{t("acsaFindCancel")}</AcsaBtn>
+            <AcsaBtn variant="primary" icon={Save} onClick={save} disabled={!computedDraft.title || !computedDraft.narrative}>{t("acsaFindSave")}</AcsaBtn>
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className="flex items-center gap-1">
+          {[
+            { id: "all", label: t("acsaFindFilterAll"), c: ACSA_T.ink },
+            { id: "P0",  label: "P0",  c: ACSA_T.oxblood },
+            { id: "P1",  label: "P1",  c: ACSA_T.warn },
+            { id: "P2",  label: "P2",  c: ACSA_T.amber },
+            { id: "P3",  label: "P3",  c: ACSA_T.ok },
+          ].map(tt => (
+            <button key={tt.id} onClick={() => setFilterTier(tt.id)}
+              className="f-mono text-xs tracked-md uppercase px-3 py-1.5 transition-colors"
+              style={{
+                background: filterTier === tt.id ? tt.c : "transparent",
+                color: filterTier === tt.id ? ACSA_T.paper : ACSA_T.muted,
+                border: `1.5px solid ${filterTier === tt.id ? tt.c : "rgba(27,36,51,.2)"}`,
+              }}>{tt.label}</button>
+          ))}
+        </div>
+        <div className="relative flex-1 max-w-xs">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{color: ACSA_T.muted}}/>
+          <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+            placeholder={t("acsaFindSearch")} className="input-base pl-9"/>
+        </div>
+        <div className="ml-auto f-mono text-xs" style={{color: ACSA_T.muted}}>
+          {filtered.length} {t("acsaFindOf")} {engagement.findings.length}
+        </div>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="border-2 border-dashed p-12 text-center" style={{borderColor: "rgba(27,36,51,.25)"}}>
+          <AlertTriangle size={28} strokeWidth={1.4} className="mx-auto mb-3" style={{color: ACSA_T.muted}}/>
+          <div className="f-body text-sm" style={{color: ACSA_T.muted}}>
+            {engagement.findings.length === 0 ? t("acsaFindEmptyNone") : t("acsaFindEmptyFiltered")}
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {filtered.map(f => (
+            <div key={f.id} className="border p-4 transition-shadow hover:shadow-paper"
+              style={{borderColor: "rgba(27,36,51,.15)", background: ACSA_T.paper, borderLeft: `4px solid ${acsaTierColor(f.tier)}`}}>
+              <div className="flex items-start gap-4">
+                <div className="text-center min-w-16">
+                  <AcsaChip color={acsaTierColor(f.tier)} bg={acsaTierColor(f.tier)} size="lg">{f.tier || "—"}</AcsaChip>
+                  <div className="f-display text-lg font-bold mt-1" style={{color: ACSA_T.ink}}>{f.score?.toFixed(1) || "—"}</div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <span className="f-mono text-xs font-semibold" style={{color: ACSA_T.oxblood}}>{f.id}</span>
+                    <AcsaChip color={ACSA_T.muted}>{f.taxonomy}</AcsaChip>
+                    {f.regulatoryTag !== "None" && <AcsaChip color={ACSA_T.warn}>{f.regulatoryTag}</AcsaChip>}
+                    <AcsaChip color={f.status === "Open" ? ACSA_T.oxblood : ACSA_T.ok}>{f.status}</AcsaChip>
+                  </div>
+                  <div className="f-display font-semibold text-base mb-1" style={{color: ACSA_T.ink}}>{f.title}</div>
+                  <div className="f-mono text-xs mb-2 truncate" style={{color: ACSA_T.muted}}>
+                    {f.component} · {f.filePath}{f.lineRange && `:${f.lineRange}`}
+                  </div>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs f-body" style={{color: ACSA_T.inkSoft}}>
+                    <span><strong>{t("acsaFindLikelihoodLabel")}</strong> {f.likelihood}</span>
+                    <span><strong>{t("acsaFindImpactLabel")}</strong> {f.impact}</span>
+                    <span><strong>{t("acsaFindAmpLabel")}</strong> {Number(f.amplification).toFixed(1)}×</span>
+                    {f.owasp && <span><strong>{t("acsaFindOwaspLabel")}</strong> {f.owasp.split(" — ")[0]}</span>}
+                  </div>
+                </div>
+                <div className="flex gap-1 flex-shrink-0">
+                  <button onClick={() => startEdit(f)} className="p-2" title="Edit">
+                    <Edit2 size={14} style={{color: ACSA_T.muted}}/>
+                  </button>
+                  <button onClick={() => remove(f.id)} className="p-2" title="Delete">
+                    <Trash2 size={14} style={{color: ACSA_T.oxblood}}/>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+function AcsaReportTab({ engagement, update, deleteEngagement, onBack }) {
+  const { t } = useT();
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const toggleCheck = (i) => {
+    const list = [...engagement.reportChecklist];
+    list[i] = { ...list[i], checked: !list[i].checked };
+    update({ ...engagement, reportChecklist: list });
+  };
+
+  const checked = engagement.reportChecklist.filter(c => c.checked).length;
+  const total = engagement.reportChecklist.length;
+  const allChecked = checked === total;
+  const gate4Signed = engagement.gateState["gate-4"]?.signed;
+
+  const summary = useMemo(() => {
+    const f = engagement.findings;
+    return {
+      total: f.length,
+      p0: f.filter(x => x.tier === "P0").length,
+      p1: f.filter(x => x.tier === "P1").length,
+      p2: f.filter(x => x.tier === "P2").length,
+      p3: f.filter(x => x.tier === "P3").length,
+      avgScore: f.length > 0 ? (f.reduce((a, b) => a + (b.score || 0), 0) / f.length).toFixed(1) : "0",
+    };
+  }, [engagement.findings]);
+
+  const exportCSV = () => {
+    const headers = [
+      "ID","Title","Component","Repository","File path","Line range","Discovery method",
+      "Claude Security excerpt","Taxonomy","OWASP","ATLAS","Narrative","Likelihood","Impact",
+      "Amplification","Score","Tier","Remediation","Preventive control","Regulatory tag","Status","Reviewer","Review date"
+    ];
+    const rows = engagement.findings.map(f => [
+      f.id, f.title, f.component, f.repository, f.filePath, f.lineRange, f.discoveryMethod,
+      f.claudeSecurityExcerpt, f.taxonomy, f.owasp, f.atlas, f.narrative, f.likelihood, f.impact,
+      f.amplification, f.score, f.tier, f.remediation, f.preventiveControl, f.regulatoryTag, f.status, f.reviewer, f.reviewDate
+    ]);
+    const escape = (v) => {
+      const s = String(v ?? "");
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const csv = [headers.map(escape).join(","), ...rows.map(r => r.map(escape).join(","))].join("\n");
+    acsaDownload(csv, `${engagement.id}_findings.csv`, "text/csv");
+  };
+
+  const exportJSON = () => {
+    acsaDownload(JSON.stringify(engagement, null, 2), `${engagement.id}_engagement.json`, "application/json");
+  };
+
+  const exportSummary = () => {
+    acsaDownload(acsaGenerateExecSummary(engagement, summary), `${engagement.id}_summary.md`, "text/markdown");
+  };
+
+  return (
+    <div className="grid grid-cols-12 gap-6">
+      <div className="col-span-12 md:col-span-7">
+        <div className="f-mono text-xs tracked uppercase mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaRepKicker")}</div>
+        <h2 className="f-display text-2xl font-bold mb-4" style={{color: ACSA_T.ink}}>{t("acsaRepTitle")}</h2>
+
+        <div className="border-2 p-4" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+          <div className="mb-4 pb-3 border-b" style={{borderColor: "rgba(27,36,51,.1)"}}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="f-display font-semibold" style={{color: ACSA_T.ink}}>{t("acsaRepProgress")}</div>
+              <div className="f-mono text-sm font-bold" style={{color: allChecked ? ACSA_T.ok : ACSA_T.ink}}>{checked}/{total}</div>
+            </div>
+            <div className="h-2" style={{background: "rgba(27,36,51,.1)"}}>
+              <div className="h-full transition-all" style={{width: `${(checked/total)*100}%`, background: allChecked ? ACSA_T.ok : ACSA_T.oxblood}}/>
+            </div>
+          </div>
+
+          {engagement.reportChecklist.map((c, i) => (
+            <button key={i} onClick={() => toggleCheck(i)}
+              className="w-full flex items-start gap-3 p-2.5 text-left transition-colors hover:bg-black/5">
+              <div className="mt-0.5">
+                {c.checked ? <CheckCircle2 size={18} style={{color: ACSA_T.ok}}/> : <Circle size={18} style={{color: ACSA_T.muted}}/>}
+              </div>
+              <div className="flex gap-2 flex-1">
+                <span className="f-mono text-[10px] mt-0.5" style={{color: ACSA_T.muted}}>{String(i+1).padStart(2,"0")}</span>
+                <span className="f-body text-sm" style={{
+                  color: c.checked ? ACSA_T.muted : ACSA_T.inkSoft,
+                  textDecoration: c.checked ? "line-through" : "none"
+                }}>{c.text}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {!allChecked && (
+          <div className="mt-3 f-mono text-[10px] tracked uppercase flex items-center gap-1" style={{color: ACSA_T.warn}}>
+            <AlertCircle size={12}/> {t("acsaRepNeedAll")}
+          </div>
+        )}
+      </div>
+
+      <div className="col-span-12 md:col-span-5 space-y-4">
+        <div className="border-2 p-5" style={{borderColor: ACSA_T.ink, background: ACSA_T.paperAlt}}>
+          <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaRepSummaryKicker")}</div>
+          <div className="grid grid-cols-2 gap-3">
+            <AcsaBoxStat l={t("acsaRepFindings")}  v={summary.total}/>
+            <AcsaBoxStat l={t("acsaRepAvgScore")} v={summary.avgScore}/>
+            <AcsaBoxStat l="P0"         v={summary.p0} c={ACSA_T.oxblood}/>
+            <AcsaBoxStat l="P1"         v={summary.p1} c={ACSA_T.warn}/>
+            <AcsaBoxStat l="P2"         v={summary.p2} c={ACSA_T.amber}/>
+            <AcsaBoxStat l="P3"         v={summary.p3} c={ACSA_T.ok}/>
+          </div>
+        </div>
+
+        <div className="border-2 p-5" style={{borderColor: ACSA_T.ink, background: ACSA_T.paper}}>
+          <div className="f-mono text-[10px] tracked uppercase mb-3" style={{color: ACSA_T.muted}}>{t("acsaRepBundleKicker")}</div>
+          <div className="space-y-2">
+            <AcsaExportRow icon={FileText}     label={t("acsaRepExportSummary")} onClick={exportSummary}/>
+            <AcsaExportRow icon={FileBarChart} label={t("acsaRepExportCsv")}     onClick={exportCSV}/>
+            <AcsaExportRow icon={Hash}         label={t("acsaRepExportJson")}    onClick={exportJSON}/>
+          </div>
+          <div className="mt-3 f-mono text-[10px]" style={{color: ACSA_T.muted}}>
+            {t("acsaRepBundleNote")}
+          </div>
+        </div>
+
+        <div className="border-2 p-5" style={{
+          borderColor: gate4Signed ? ACSA_T.ok : ACSA_T.oxblood,
+          background: gate4Signed ? "rgba(59,110,58,.05)" : "rgba(122,31,43,.05)",
+        }}>
+          <div className="flex items-center gap-3 mb-2">
+            {gate4Signed ? <ShieldCheck size={20} style={{color: ACSA_T.ok}}/> : <FlagTriangleRight size={20} style={{color: ACSA_T.oxblood}}/>}
+            <div>
+              <div className="f-mono text-[10px] tracked uppercase" style={{color: gate4Signed ? ACSA_T.ok : ACSA_T.oxblood}}>
+                {gate4Signed ? t("acsaRepGate4Signed") : t("acsaRepGate4Pending")}
+              </div>
+              <div className="f-display font-bold text-sm" style={{color: ACSA_T.ink}}>{t("acsaRepGate4Title")}</div>
+            </div>
+          </div>
+          {gate4Signed ? (
+            <p className="f-body text-xs" style={{color: ACSA_T.inkSoft}}>
+              {t("acsaRepGate4SignedBody", {
+                signer: engagement.gateState["gate-4"].signer,
+                date: new Date(engagement.gateState["gate-4"].date).toLocaleDateString()
+              })}
+            </p>
+          ) : (
+            <p className="f-body text-xs" style={{color: ACSA_T.inkSoft}}>
+              {t("acsaRepGate4PendingBody")}
+            </p>
+          )}
+        </div>
+
+        <div className="pt-3">
+          {confirmDelete ? (
+            <div className="border-2 p-3 anim-up" style={{borderColor: ACSA_T.oxblood, background: "rgba(122,31,43,.05)"}}>
+              <div className="f-display text-sm font-bold mb-2" style={{color: ACSA_T.oxblood}}>{t("acsaRepDeleteQuestion")}</div>
+              <p className="f-body text-xs mb-3" style={{color: ACSA_T.inkSoft}}>
+                {t("acsaRepDeleteWarning")}
+              </p>
+              <div className="flex gap-2 justify-end">
+                <AcsaBtn variant="ghost" size="sm" onClick={() => setConfirmDelete(false)}>{t("acsaRepDeleteCancel")}</AcsaBtn>
+                <AcsaBtn variant="primary" size="sm" icon={Trash2} onClick={async () => {
+                  await deleteEngagement(engagement.id);
+                  onBack();
+                }}>{t("acsaRepDeleteConfirm")}</AcsaBtn>
+              </div>
+            </div>
+          ) : (
+            <button onClick={() => setConfirmDelete(true)}
+              className="f-mono text-[10px] tracked uppercase inline-flex items-center gap-1"
+              style={{color: ACSA_T.muted}}>
+              <Trash2 size={12}/> {t("acsaRepDeleteEng")}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AcsaBoxStat({ l, v, c = ACSA_T.ink }) {
+  return (
+    <div className="bg-white p-3" style={{border: "1px solid rgba(27,36,51,.1)"}}>
+      <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>{l}</div>
+      <div className="f-display text-2xl font-bold mt-0.5" style={{color: c}}>{v}</div>
+    </div>
+  );
+}
+
+function AcsaExportRow({ icon: Icon, label, onClick }) {
+  return (
+    <button onClick={onClick}
+      className="w-full flex items-center gap-3 p-2.5 transition-colors hover:bg-black/5 border"
+      style={{borderColor: "rgba(27,36,51,.1)"}}>
+      <Icon size={16} style={{color: ACSA_T.oxblood}}/>
+      <span className="f-body text-sm flex-1 text-left" style={{color: ACSA_T.ink}}>{label}</span>
+      <Download size={14} style={{color: ACSA_T.muted}}/>
+    </button>
+  );
+}
+
+function acsaDownload(content, filename, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function acsaGenerateExecSummary(eng, summary) {
+  return `# Executive Summary — ${eng.id}
+
+**Client:** ${eng.client}
+**Tier:** ${eng.tier}
+**Started:** ${new Date(eng.startDate).toLocaleDateString()}
+**Practice Lead:** ${eng.leadName}
+
+## Headline results
+
+| Metric | Value |
+|--------|-------|
+| Total findings | ${summary.total} |
+| P0 — must remediate before next deploy | ${summary.p0} |
+| P1 — remediate within 30 days | ${summary.p1} |
+| P2 — remediate within 90 days | ${summary.p2} |
+| P3 — track but acceptable risk | ${summary.p3} |
+| Average Practice Risk Score | ${summary.avgScore} |
+
+## Top three risks (by Practice Risk Score)
+
+${eng.findings
+  .slice()
+  .sort((a,b) => (b.score||0) - (a.score||0))
+  .slice(0, 3)
+  .map((f, i) => `### ${i+1}. ${f.title} — ${f.tier} (score ${f.score?.toFixed(1)})
+
+- **Component:** ${f.component}
+- **Taxonomy:** ${f.taxonomy}
+- **OWASP:** ${f.owasp}
+- **Regulatory tag:** ${f.regulatoryTag}
+
+**Exploit narrative:** ${f.narrative}
+
+**Recommended remediation:** ${f.remediation}
+`).join("\n")}
+
+## Gate signatures
+
+${ACSA_PHASES.filter(p => p.gate != null).map(p => {
+  const g = eng.gateState[`gate-${p.gate}`];
+  return g.signed
+    ? `- **${p.gateName}** — signed by ${g.signer} on ${new Date(g.date).toLocaleDateString()}`
+    : `- **${p.gateName}** — *pending*`;
+}).join("\n")}
+
+---
+*Generated from CyberWatch · ACSA Module on ${new Date().toLocaleString()}*
+`;
+}
+
+// =============================================================================
+// ACSA — ROOT MODULE
+// =============================================================================
+function AcsaPlatformModule() {
+  const { t } = useT();
+  const [view, setView] = useState("catalog");
+  const [selected, setSelected] = useState(null);
+
+  const [proposals, setProposals] = useState([]);
+  const refreshProposals = async () => {
+    setProposals(await acsaLoadStored(ACSA_PROPOSALS_KEY, []));
+  };
+
+  const [engagements, setEngagements] = useState([]);
+  const [activeEngagementId, setActiveEngagementId] = useState(null);
+  const [trackerLoaded, setTrackerLoaded] = useState(false);
+  const refreshEngagements = async () => {
+    const list = await acsaLoadStored(ACSA_ENG_LIST_KEY, []);
+    const loaded = await Promise.all(list.map(id => acsaLoadStored(acsa_eng_key(id), null)));
+    setEngagements(loaded.filter(Boolean));
+    setTrackerLoaded(true);
+  };
+
+  useEffect(() => { refreshProposals(); refreshEngagements(); }, []);
+
+  const updateEngagement = async (next) => {
+    await acsaSaveStored(acsa_eng_key(next.id), next);
+    setEngagements(es => es.map(e => e.id === next.id ? next : e));
+  };
+  const deleteEngagement = async (id) => {
+    const list = await acsaLoadStored(ACSA_ENG_LIST_KEY, []);
+    await acsaSaveStored(ACSA_ENG_LIST_KEY, list.filter(x => x !== id));
+    await acsaDeleteStored(acsa_eng_key(id));
+    setActiveEngagementId(null);
+    refreshEngagements();
+  };
+
+  useEffect(() => {
+    if (view !== "tracker") setActiveEngagementId(null);
+  }, [view]);
+
+  const activeEngagement = engagements.find(e => e.id === activeEngagementId);
+
+  return (
+    <div className="acsa-scope min-h-screen f-body grain" style={{background: ACSA_T.paper, color: ACSA_T.ink}}>
+      <style>{ACSA_FONT_STYLES}</style>
+      <AcsaNavBar
+        view={view}
+        setView={setView}
+        proposalsCount={proposals.length}
+        engagementsCount={engagements.length}
+        activeEngagementId={activeEngagementId}
+      />
+      <div>
+        {view === "catalog"   && <AcsaCatalogView    setView={setView} setSelected={setSelected}/>}
+        {view === "detail"    && <AcsaDetailView     setView={setView}/>}
+        {view === "calc"      && <AcsaCalculatorView setView={setView} refreshProposals={refreshProposals}/>}
+        {view === "proposals" && <AcsaProposalsView  setView={setView} proposals={proposals} refreshProposals={refreshProposals}/>}
+        {view === "tracker"   && (
+          !trackerLoaded ? (
+            <div className="max-w-7xl mx-auto px-6 py-24 text-center f-mono text-sm" style={{color: ACSA_T.muted}}>
+              {t("acsaTrackerLoading")}
+            </div>
+          ) : activeEngagement ? (
+            <AcsaEngagementView
+              engagement={activeEngagement}
+              updateEngagement={updateEngagement}
+              onBack={() => setActiveEngagementId(null)}
+              deleteEngagement={deleteEngagement}
+            />
+          ) : (
+            <AcsaTrackerHomeView
+              engagements={engagements}
+              onOpenEngagement={(id) => setActiveEngagementId(id)}
+              refresh={refreshEngagements}
+              setView={setView}
+            />
+          )
+        )}
+      </div>
+      <footer className="border-t mt-16 py-8" style={{borderColor: "rgba(27,36,51,.15)"}}>
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4">
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>
+            {t("acsaFooterLeft")}
+          </div>
+          <div className="f-mono text-[10px] tracked uppercase" style={{color: ACSA_T.muted}}>
+            {t("acsaFooterRight")}
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
